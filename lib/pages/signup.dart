@@ -1,18 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
-import 'package:upr_housing/pages/signup.dart';
 
-class LoginPage extends StatelessWidget{
-  LoginPage({super.key});
+class SignupPage extends StatelessWidget{
+  SignupPage({super.key});
 
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
+  final phoneController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   void signUserIn() {}
-  void signUp() {
-  }
+  void signUp() {}
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,20 @@ class LoginPage extends StatelessWidget{
               hintText: 'Username',
               obscureText: false,
             ),
-            
+
+            const SizedBox(height: 10),
+            MyTextField(
+              controller: emailController,
+              hintText: 'email',
+              obscureText: false,
+            ),
+
+            const SizedBox(height: 10),
+            MyTextField(
+              controller: phoneController,
+              hintText: 'phone',
+              obscureText: false,
+            ),
             
             const SizedBox(height: 10),
             MyTextField(
@@ -53,6 +66,14 @@ class LoginPage extends StatelessWidget{
               obscureText: true,
             ),
 
+            const SizedBox(height: 10),
+            MyTextField(
+              controller: confirmPasswordController,
+              hintText: 'Confirm Password',
+              obscureText: true,
+            ),
+
+
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -60,7 +81,7 @@ class LoginPage extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                 Text(
-                'Forgot Password?',
+                'Return to Login Page?',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -68,21 +89,10 @@ class LoginPage extends StatelessWidget{
               ]),
             ),
 
-            const SizedBox(height: 40),
-
-            MyButton(
-              onTap: signUserIn
-            ),
-
             const SizedBox(height: 20),
             
             SignUpButton(
-              onTap: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => SignupPage()));
-              },
-              //onTap: signUp
+              onTap: signUp
             )
 
 

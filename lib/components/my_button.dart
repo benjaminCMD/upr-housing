@@ -39,6 +39,37 @@ class MyButton extends StatelessWidget {
   }
 }
 
+class SignUpButton2 extends StatelessWidget {
+  final Function()? onTap;
+  const SignUpButton2({
+    super.key,
+    required this.onTap
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+                  GestureDetector(
+                    onTap: onTap,
+                    child: const Text(
+                      "Register now",
+                      style: TextStyle(
+                        // color: Colors.blue,
+                        color:  Color(0xFF4CAF50),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+          );
+  
+
+  }
+
+}
 
 class SignUpButton extends StatelessWidget {
   final Function()? onTap;
