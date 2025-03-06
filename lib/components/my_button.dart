@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? onTap;
+  final String text;
   const MyButton({
     super.key,
-    required this.onTap
+    required this.onTap,
+    required this.text
 
     }
     );
@@ -24,7 +26,7 @@ class MyButton extends StatelessWidget {
           ),
         child: Center(
         child:Text(
-          'Sign In',
+          text,
           style: TextStyle(
             color: Colors.black,
             fontSize: 16,
@@ -39,37 +41,38 @@ class MyButton extends StatelessWidget {
   }
 }
 
-class SignUpButton2 extends StatelessWidget {
-  final Function()? onTap;
-  const SignUpButton2({
-    super.key,
-    required this.onTap
-  });
+// class SignUpButton2 extends StatelessWidget {
+//   final Function()? onTap;
+//   const SignUpButton2({
+//     super.key,
+//     required this.onTap
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-                  GestureDetector(
-                    onTap: onTap,
-                    child: const Text(
-                      "Register now",
-                      style: TextStyle(
-                        // color: Colors.blue,
-                        color:  Color(0xFF4CAF50),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-          );
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//                   GestureDetector(
+//                     onTap: onTap,
+//                     child: const Text(
+//                       "Register now",
+//                       style: TextStyle(
+//                         // color: Colors.blue,
+//                         color:  Color(0xFF4CAF50),
+//                         fontSize: 16,
+//                         fontWeight: FontWeight.bold,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//           );
   
 
-  }
+//   }
 
-}
+
+
 
 class SignUpButton extends StatelessWidget {
   final Function()? onTap;
@@ -106,3 +109,4 @@ class SignUpButton extends StatelessWidget {
   }
 
 }
+

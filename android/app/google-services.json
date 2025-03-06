@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "340894688948",
+    "project_id": "upr-housing",
+    "storage_bucket": "upr-housing.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340894688948:android:194b09932af9d4b28ed9e1",
+        "android_client_info": {
+          "package_name": "com.example.upr_housing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyJ-o2AE8zjQYm65aOk7p29AihAPQi1U0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

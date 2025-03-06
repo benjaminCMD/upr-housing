@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
 
+
+
+
 class SignupPage extends StatelessWidget{
   SignupPage({super.key});
 
@@ -73,27 +76,15 @@ class SignupPage extends StatelessWidget{
               obscureText: true,
             ),
 
+            const SizedBox(height: 40),
+            MyButton(
+              onTap: signUp,
+              text: 'Sign up'
+              ),
 
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                Text(
-                'Return to Login Page?',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ))
-              ]),
-            ),
 
-            const SizedBox(height: 20),
-            
-            SignUpButton(
-              onTap: signUp
-            )
+
 
 
           ],
