@@ -3,11 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
+import 'package:upr_housing/pages/signup.dart';
 
 // import 'package:upr_housing/pages/signup.dart';
 
 class LoginPage extends StatelessWidget{
   LoginPage({super.key});
+
+  
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -83,6 +86,32 @@ class LoginPage extends StatelessWidget{
 
             const SizedBox(height: 20),
             
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Do not have an account?',
+                  style: TextStyle(color: Colors.grey),
+                ), 
+                const SizedBox(width: 4),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                   context, 
+                   MaterialPageRoute(builder: (context) => SignupPage()));
+               },
+                child:  Text(
+                  'Resgister Now',
+                  style: TextStyle(
+                     color: Colors.blue,
+                     fontWeight: FontWeight.bold
+                     
+                     
+                  ),
+                ),
+                ),
+              ],
+            )
             // SignUpButton(
             //   onTap: () {
             //     Navigator.push(

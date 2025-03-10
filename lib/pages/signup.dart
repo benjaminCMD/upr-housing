@@ -1,6 +1,11 @@
+import 'dart:ffi';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:upr_housing/pages/home_page.dart';
 
 
 
@@ -14,8 +19,47 @@ class SignupPage extends StatelessWidget{
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  void signUserIn() {}
-  void signUp() {}
+  final _auth = FirebaseAuth.instance;
+
+  void signUserUp(context) async {
+    try {
+
+      if(passwordController.text == confirmPasswordController.text){
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, 
+          password: passwordController.text,
+          );
+          Navigator.pop(context);
+      }else{
+        //Password doesnt match
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Container(
+            padding: EdgeInsets.all(16),
+            height: 90,
+            child: Text("Passwords to not match"),
+          ),
+          behavior: SnackBarBehavior.floating,
+          )
+        );
+      }
+      
+    }on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Container(
+            padding: EdgeInsets.all(16),
+            height: 90,
+            child: Text("There has been an error"),
+          ),
+          behavior: SnackBarBehavior.floating,
+          )
+        );
+
+    }
+  //void signUp() {}
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +122,7 @@ class SignupPage extends StatelessWidget{
 
             const SizedBox(height: 40),
             MyButton(
-              onTap: signUp,
+              onTap: () => signUserUp(context),
               text: 'Sign up'
               ),
 
@@ -93,4 +137,6 @@ class SignupPage extends StatelessWidget{
     )
     );
   }
+
+
 }
