@@ -1,11 +1,12 @@
-import 'dart:ffi';
-import 'dart:math';
+// import 'dart:ffi';
+// import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:upr_housing/pages/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 
@@ -19,31 +20,52 @@ class SignupPage extends StatelessWidget{
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
+
+  Future<UserCredential> createUser() async {
+    return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, 
+          password: passwordController.text,
+    );
+  }
+
+  Future<void> addUserInfoToFireStore(uid) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).set({
+          'username': usernameController.text,
+          'email': emailController.text,
+          'phone': phoneController.text,
+          'uid': uid,
+          'createdAt': Timestamp.now(),
+    });
+  }
 
   void signUserUp(context) async {
     try {
-
+      // Store user details in Firestore
       if(passwordController.text == confirmPasswordController.text){
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, 
-          password: passwordController.text,
-          );
-          Navigator.pop(context);
+ 
+
+        UserCredential userCredential = await createUser();
+
+        String uid = userCredential.user!.uid;
+
+        addUserInfoToFireStore(uid);
+        Navigator.pop(context);
+
       }else{
         //Password doesnt match
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Container(
-            padding: EdgeInsets.all(16),
-            height: 90,
-            child: Text("Passwords to not match"),
+            padding: EdgeInsets.all(4),
+            height: 30,
+            child: Text("Passwords do not match"),
           ),
           behavior: SnackBarBehavior.floating,
           )
         );
       }
       
-    }on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Container(
@@ -56,7 +78,8 @@ class SignupPage extends StatelessWidget{
         );
 
     }
-  //void signUp() {}
+
+
 
 
   }

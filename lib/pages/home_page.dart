@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
   
   final user = FirebaseAuth.instance.currentUser!;
+  
 
 
   void signUserOut() {
