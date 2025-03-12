@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthPage extends StatelessWidget {
   final _auth = FirebaseAuth.instance;
+  
   AuthPage({super.key});
 
   @override
