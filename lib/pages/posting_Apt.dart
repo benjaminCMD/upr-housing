@@ -12,26 +12,13 @@ class PostingAptApp extends StatefulWidget {
 }
 
 class PostingAptAppState extends State<PostingAptApp> {
+  //Creating Controller for each one of the boxes, in order to save the information
   TextEditingController aTitleController = TextEditingController();
   TextEditingController aTownController = TextEditingController();
   TextEditingController aNeighborhoodController = TextEditingController();
   TextEditingController aPriceController = TextEditingController();
-  Apartment apt = Apartment();
 
-
-  Future<void> addApartment(
-    aTitle,
-    aTown,
-    aPrice,
-    aNeighborhood,
-  ) async {
-    await FirebaseFirestore.instance.collection('Apartments').add({
-      'Apartment_title': aTitle,
-      'Town': aTown,
-      'Price': aPrice,
-      'Neighborhood': aNeighborhood,
-    });
-  }
+  Apartment apt = Apartment(); //Create class Apartment
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +46,28 @@ class PostingAptAppState extends State<PostingAptApp> {
             hintText: 'Neighborhood',
             obscureText: false),
         const SizedBox(height: 25),
+        //The button add a new Apartments to the database
         MyButton(
-            onTap: () => addApartment(
+            onTap: () {
+              if (aTitleController.text.trim().isEmpty ||
+                  aTownController.text.trim().isEmpty ||
+                  aPriceController.text.trim().isEmpty ||
+                  aNeighborhoodController.text.trim().isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Please field all the blanks!'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              } else {
+                apt.addApartment(
                   aTitleController.text,
                   aTownController.text,
                   aPriceController.text,
                   aNeighborhoodController.text,
-                ),
+                );
+              }
+            },
             text: "Posting Apartment"),
       ],
     ))));
