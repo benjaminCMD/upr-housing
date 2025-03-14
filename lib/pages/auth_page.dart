@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upr_housing/pages/login.dart';
 import 'dummy_home.dart';
-import 'package:upr_housing/pages/posting_Apt.dart';
+import 'package:upr_housing/pages/posting_apt.dart';
 import 'home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,7 +18,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return PostingAptApp();
+            return HomePageApp(); // if you are working on different page, change it here
           }
 
           else {

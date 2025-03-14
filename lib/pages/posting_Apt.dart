@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/components/my_textfield.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:upr_housing/model/Apartments_Crud.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:upr_housing/model/apartments.dart';
 
 class PostingAptApp extends StatefulWidget {
   const PostingAptApp({super.key});

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:flutter/material.dart';
-import 'package:upr_housing/components/Product.dart';
-import 'package:upr_housing/components/ProductCard.dart';
-import 'package:upr_housing/components/ProductList.dart';
+import 'package:upr_housing/components/product.dart';
+import 'package:upr_housing/components/product_cart.dart';
+import 'package:upr_housing/components/product_list.dart';
 
 class HomePageApp extends StatefulWidget {
   const HomePageApp({super.key});

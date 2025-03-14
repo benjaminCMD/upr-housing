@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upr_housing/components/Product.dart';
+import 'package:upr_housing/components/product.dart';
 
 
 class ProductCard extends StatelessWidget {
@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 SizedBox(height: 0,
                 ),
-                Text(product.Owner),//name of the Owner
+                Text(product.owner),//name of the owner
                 SizedBox(height: 25,),
                 Text('Summary: ' + product.summary),
                 SizedBox(height: 25,),
