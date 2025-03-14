@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:flutter/material.dart';
+import 'package:upr_housing/components/Product.dart';
+import 'package:upr_housing/components/ProductCard.dart';
+import 'package:upr_housing/components/ProductList.dart';
 
 class HomePageApp extends StatefulWidget {
   const HomePageApp({super.key});
@@ -36,9 +39,20 @@ class HomePageAppState extends State<HomePageApp> {
                 ),
               ),
             ),
+            // ListView.builder(
+            //         itemCount: products.length,
+            //         itemBuilder: (context, index){
+            //           final product = products[index];
+            //           return SizedBox(
+            //             height:225,
+            //             child: ProductCard(product: product),
+            //             );
+            //         },
+            //       )
           ],
         ),
       ),
+
     );
   }
 }

@@ -18,7 +18,7 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-            return HomePageApp();
+            return PostingAptApp();
           }
 
           else {
