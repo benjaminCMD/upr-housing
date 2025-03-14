@@ -8,31 +8,36 @@ class MySearchBar extends StatefulWidget {
 }
 
 class SearchBarState extends State<MySearchBar> {
+  
   @override
   Widget build(BuildContext context) {
+    // final SearchController controller = SearchController();
     return Container(
               width: double.infinity,
               color: Color(0xFF4CAF50),
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: SearchAnchor(
-                  builder: (BuildContext context, SearchController controller) {
-                    return SearchBar(
-                      controller: controller,
-                      padding: const WidgetStatePropertyAll<EdgeInsets>(
-                        EdgeInsets.symmetric(horizontal: 15.0),
-                      ),
-                      onTap: () {
-                        controller.openView();
-                      },
-                      onChanged: (_) {
-                        controller.openView();
-                      },
-                      leading: const Icon(Icons.search, color: Colors.black), // Adjust icon color
-                      backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white),
-                    );
-                  },
+                child: SearchAnchor.bar(
+                  barBackgroundColor: WidgetStateProperty.all(Colors.white),
+                  // shrinkWrap: false,
+                  // barElevation: WidgetStateProperty.all(6.0),
+                  isFullScreen: false,
+                  viewBackgroundColor: Colors.white,
+                  viewShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0)
+                  ),
+                  barShape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0)
+                      )
+                    ),
+                  // viewHeaderHeight: 100,
+                  // viewElevation: 100.0,
+                  viewConstraints: BoxConstraints(maxHeight: 300.0),
+
+                  dividerColor: Colors.black,
+
                   suggestionsBuilder: (BuildContext context, SearchController controller) {
 
                     final List<String> towns = ['Mayaguez', 'Arecibo', 'Ponce', 'San Juan', 'Cayey'];
