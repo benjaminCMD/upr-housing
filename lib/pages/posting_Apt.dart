@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_button.dart';
+import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
@@ -18,6 +19,8 @@ class PostingAptAppState extends State<PostingAptApp> {
   TextEditingController aTownController = TextEditingController();
   TextEditingController aNeighborhoodController = TextEditingController();
   TextEditingController aPriceController = TextEditingController();
+  TextEditingController aGenre = TextEditingController();
+  TextEditingController aSummary = TextEditingController();
 
   Apartment apt = Apartment(); //Create class Apartment
 
@@ -47,13 +50,25 @@ class PostingAptAppState extends State<PostingAptApp> {
             hintText: 'Neighborhood',
             obscureText: false),
         const SizedBox(height: 25),
+        MyTextField(
+            controller: aGenre,
+            hintText: 'Genre',
+            obscureText: false),
+        const SizedBox(height: 25),
+        MyLargetextfield(
+            controller: aSummary,
+            hintText: 'Summary',
+            obscureText: false),
+        const SizedBox(height: 25),
         //The button add a new Apartments to the database
         MyButton(
             onTap: () {
               if (aTitleController.text.trim().isEmpty ||
                   aTownController.text.trim().isEmpty ||
                   aPriceController.text.trim().isEmpty ||
-                  aNeighborhoodController.text.trim().isEmpty) {
+                  aNeighborhoodController.text.trim().isEmpty||
+                  aGenre.text.trim().isEmpty||
+                  aSummary.text.trim().isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Please field all the blanks!'),
@@ -66,6 +81,8 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text,
                   aPriceController.text,
                   aNeighborhoodController.text,
+                  aGenre.text,
+                  aSummary.text,
                   FirebaseAuth.instance.currentUser!.uid
                 );
               }
