@@ -11,6 +11,6 @@ class Apartment {
       'Neighborhood': aNeighborhood,
     });
     
-    await docRef.update({'aID': docRef});
+    await docRef.update({'aID': docRef.id});
   }
 }
