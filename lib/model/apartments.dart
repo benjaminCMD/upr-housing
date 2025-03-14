@@ -2,15 +2,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Apartment {
-  Future<void> addApartment(aTitle, aTown, aPrice, aNeighborhood) async {
+  Future<void> addApartment(aTitle, aTown, aPrice, aNeighborhood, uID) async {
     
     DocumentReference<Map<String, dynamic>> docRef = await FirebaseFirestore.instance.collection('Apartments').add({
       'Apartment_title': aTitle,
       'Town': aTown,
       'Price': aPrice,
       'Neighborhood': aNeighborhood,
+      'uID' : uID
     });
     
-    await docRef.update({'aID': docRef});
+    await docRef.update({'aID': docRef.id});
   }
 }

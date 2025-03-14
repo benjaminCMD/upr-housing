@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/components/my_textfield.dart';
@@ -65,6 +66,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text,
                   aPriceController.text,
                   aNeighborhoodController.text,
+                  FirebaseAuth.instance.currentUser!.uid
                 );
               }
             },
