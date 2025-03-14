@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:upr_housing/components/product.dart';
 
 
-class ProductCard extends StatelessWidget {
+class ProductCardApp extends StatefulWidget {
   //Required Product to initialize the card
-  final Product product;
+  Product product;
 
-  const ProductCard({
+  ProductCardApp({
     super.key,
     required this.product,
   });
 
+  @override
+  State<ProductCardApp> createState() => _ProductCardAppState();
+}
 
+class _ProductCardAppState extends State<ProductCardApp> {
   @override
   Widget build(BuildContext context) {
     return  Card(
@@ -20,7 +24,7 @@ class ProductCard extends StatelessWidget {
       child: Row(mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(product.imageUrl,
+          Image.network(widget.product.imageUrl,
           width: 225,
           height: 200,
           fit:BoxFit.cover
@@ -30,18 +34,16 @@ class ProductCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 0,
+                Text(widget.product.owner),//name of the owner
+                SizedBox(height: 20,),
+                Text('Summary: ' + widget.product.summary),
+                SizedBox(height: 20,),
+                Text('Price: ' + widget.product.price.toString(),
                 ),
-                Text(product.owner),//name of the owner
-                SizedBox(height: 25,),
-                Text('Summary: ' + product.summary),
-                SizedBox(height: 25,),
-                Text('Price: ' + product.price.toString(),
-                ),
-                SizedBox(height: 25,),
+                SizedBox(height: 20,),
                 Row(children: [
                   Icon(Icons.thumb_up,color: Colors.red,),
-                  Text("   " + product.likes.toString())
+                  Text("   " + widget.product.likes.toString())
                 ],)
               ],
             ),

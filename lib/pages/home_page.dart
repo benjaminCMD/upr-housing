@@ -17,13 +17,13 @@ class HomePageAppState extends State<HomePageApp> {
     FirebaseAuth.instance.signOut();
   }
 
+  List<Product> products = p;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-
             MySearchBar(),
 
             // White Background Section (Main Content)
@@ -32,27 +32,22 @@ class HomePageAppState extends State<HomePageApp> {
                 width: double.infinity,
                 color: Colors.white,
                 child: Center(
-                  child: const Text(
-                    "Main Content Goes Here",
-                    style: TextStyle(fontSize: 18),
+                  child: ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return SizedBox(
+                        height: 225,
+                        child: ProductCardApp(product: product),
+                      );
+                    },
                   ),
                 ),
               ),
             ),
-            // ListView.builder(
-            //         itemCount: products.length,
-            //         itemBuilder: (context, index){
-            //           final product = products[index];
-            //           return SizedBox(
-            //             height:225,
-            //             child: ProductCard(product: product),
-            //             );
-            //         },
-            //       )
           ],
         ),
       ),
-
     );
   }
 }

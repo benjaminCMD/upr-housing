@@ -1,10 +1,10 @@
 class Product{
   //Class for the products presented in the Home page
-  final String imageUrl;
-  final String owner;
-  final String summary;
-  final int likes;
-  final double price;
+  String imageUrl;
+  String owner;
+  String summary;
+  int likes;
+  double price;
 
   Product({
     required this.imageUrl,
