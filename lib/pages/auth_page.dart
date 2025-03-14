@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upr_housing/pages/login.dart';
+import 'dummy_home.dart';
 import 'home_page.dart';
-import 'home_page2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthPage extends StatelessWidget {
@@ -24,8 +24,6 @@ class AuthPage extends StatelessWidget {
             return LoginPage();
           }
 
-          
-
         }
 
       )
@@ -33,4 +31,4 @@ class AuthPage extends StatelessWidget {
     );
   }
   
-  }
+}
