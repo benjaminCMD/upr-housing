@@ -12,7 +12,7 @@ class SearchBarState extends State<MySearchBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 42,
+      height: 40,
       child: SearchAnchor.bar(
         barBackgroundColor: WidgetStateProperty.all(Colors.white),
         isFullScreen: false,
@@ -24,6 +24,7 @@ class SearchBarState extends State<MySearchBar> {
         ),
         viewConstraints: BoxConstraints(maxHeight: 300.0, maxWidth: double.infinity),
         dividerColor: Colors.black,
+        barHintText: "Search",
         suggestionsBuilder: (BuildContext context, SearchController controller) {
           final List<String> towns = ['Mayaguez', 'Arecibo', 'Ponce', 'San Juan', 'Cayey'];
           return towns.map((String town) {
