@@ -5,6 +5,7 @@ import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
+import 'package:upr_housing/pages/home_page.dart';
 
 class PostingAptApp extends StatefulWidget {
   const PostingAptApp({super.key});
@@ -85,6 +86,12 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aSummary.text,
                   FirebaseAuth.instance.currentUser!.uid
                 );
+                // Does the transition between postingApt page to 
+                // Do not erase this plz
+                // Navigator.push(
+                //    context, 
+                //    MaterialPageRoute(builder: (context) => const HomePageApp())
+                // );
               }
             },
             text: "Posting Apartment"),
