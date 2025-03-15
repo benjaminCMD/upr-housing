@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:flutter/material.dart';
+import 'package:upr_housing/pages/posting_Apt.dart';
 import 'package:upr_housing/components/product.dart';
 import 'package:upr_housing/components/product_cart.dart';
 import 'package:upr_housing/components/product_list.dart';
@@ -17,14 +18,29 @@ class HomePageAppState extends State<HomePageApp> {
     FirebaseAuth.instance.signOut();
   }
 
+  void moveToPostingApt(){
+    Navigator.push(
+                   context, 
+                   MaterialPageRoute(builder: (context) => PostingAptApp())
+    );
+  }
+
   List<Product> products = p;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: SizedBox(
+          // height: 40, // Adjust height to fit nicely
+          child: MySearchBar(),
+  ),
+      backgroundColor: Color(0xFF4CAF50) ,
+      automaticallyImplyLeading: false, 
+      ) ,
       body: SafeArea(
         child: Column(
           children: [
-            MySearchBar(),
+            // MySearchBar(),
 
             // White Background Section (Main Content)
             Expanded(
