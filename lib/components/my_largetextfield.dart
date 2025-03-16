@@ -19,6 +19,7 @@ class MyLargetextfield extends StatelessWidget {
    return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
+                keyboardType: TextInputType.multiline,
                 controller: controller,
                 obscureText: obscureText,
                 maxLines: 8,
@@ -31,7 +32,6 @@ class MyLargetextfield extends StatelessWidget {
                 filled: true,
                 hintText: hintText
                 ),
-    
               ),
     );
   }

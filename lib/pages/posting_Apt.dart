@@ -43,90 +43,119 @@ class PostingAptAppState extends State<PostingAptApp> {
 
   Apartment apt = Apartment(); //Create class Apartment
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return GestureDetector(
+    onTap: () {
+      FocusScope.of(context).unfocus(); // Unfocus text fields when tapping outside
+    },
+    behavior: HitTestBehavior.opaque, // Ensures taps on empty space are detected
+    child: Scaffold(
       appBar: AppBar(
-        // When transitions are implemented the back arrow icon should appear
+        title: Text(
+          "New Apartment",
+          style: TextStyle(
+            color: Colors.black, 
+            fontSize: 20, 
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageApp()) );
+            Navigator.pop(context);
+          } , 
+          icon: Icon(Icons.arrow_back_outlined),  color: Colors.black ,),
+        centerTitle: true, // Centers the title
         backgroundColor: Color(0xFF4CAF50),
+        // toolbarHeight: 35,
       ),
-        body: SafeArea(
-            child: Center(
-                child: ListView(
-      children: [
-        const SizedBox(height: 25),
-        MyTextField(
-            controller: aTitleController,
-            hintText: 'Apartment Title',
-            obscureText: false),
-        const SizedBox(height: 25),
-        MyTextField(
-            controller: aTownController, hintText: 'Town', obscureText: false),
-        const SizedBox(height: 25),
-        MyTextField(
-            controller: aPriceController,
-            hintText: 'Price',
-            obscureText: false),
-        const SizedBox(height: 25),
-        MyTextField(
-            controller: aNeighborhoodController,
-            hintText: 'Neighborhood',
-            obscureText: false),
-        const SizedBox(height: 25),
-        MyDropdown(
-          text: 'Type', 
-          items: types,
-          selectedValue: (value) => selectedDropdownValue('aType', value), // Passes value of dropdown to update dictionary
+      body: SafeArea(
+        child: Center(
+          child: ListView(
+            children: [
+              const SizedBox(height: 25),
+              MyTextField(
+                controller: aTitleController,
+                hintText: 'Title',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
+              MyTextField(
+                controller: aTownController,
+                hintText: 'Town',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
+              MyTextField(
+                controller: aPriceController,
+                hintText: 'Price',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
+              MyTextField(
+                controller: aNeighborhoodController,
+                hintText: 'Neighborhood',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
+              MyDropdown(
+                text: 'Type',
+                items: types,
+                selectedValue: (value) =>
+                    selectedDropdownValue('aType', value),
+              ),
+              const SizedBox(height: 25),
+              MyDropdown(
+                text: 'Gender',
+                items: genders,
+                selectedValue: (value) =>
+                    selectedDropdownValue('aGender', value),
+              ),
+              const SizedBox(height: 25),
+              MyLargetextfield(
+                controller: aSummary,
+                hintText: 'Enter a brief description about your apartment',
+                obscureText: false,
+              ),
+              const SizedBox(height: 25),
+              MyButton(
+                onTap: () {
+                  if (aTitleController.text.trim().isEmpty ||
+                      aTownController.text.trim().isEmpty ||
+                      aPriceController.text.trim().isEmpty ||
+                      aNeighborhoodController.text.trim().isEmpty ||
+                      dropDownInitialValues.containsValue(null) ||
+                      aSummary.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please fill all the fields!'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  } else {
+                    apt.addApartment(
+                      aTitleController.text,
+                      aTownController.text,
+                      aPriceController.text,
+                      aNeighborhoodController.text,
+                      dropDownInitialValues['aType'],
+                      dropDownInitialValues['aGender'],
+                      aSummary.text,
+                      FirebaseAuth.instance.currentUser!.uid,
+                    );
+                  }
+                },
+                text: "Submit",
+              ),
+              const SizedBox(height: 20),
+            ],
           ),
-        const SizedBox(height: 25),
-        MyDropdown(
-          text: 'Gender', 
-          items: genders,
-          selectedValue: (value) => selectedDropdownValue('aGender', value),
-          ),
-        const SizedBox(height: 25),
-        MyLargetextfield(
-            controller: aSummary,
-            hintText: 'Summary',
-            obscureText: false),
-        const SizedBox(height: 25),
-        //The button add a new Apartments to the database
-        MyButton(
-            onTap: () {
-              if (aTitleController.text.trim().isEmpty ||
-                  aTownController.text.trim().isEmpty ||
-                  aPriceController.text.trim().isEmpty ||
-                  aNeighborhoodController.text.trim().isEmpty||
-                  dropDownInitialValues.containsValue(null)|| // if any of the dropdown initial values are still null
-                  aSummary.text.trim().isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Please fill all the fields!'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              } else {
-                apt.addApartment(
-                  aTitleController.text,
-                  aTownController.text,
-                  aPriceController.text,
-                  aNeighborhoodController.text,
-                  dropDownInitialValues['aType'],
-                  dropDownInitialValues['aGender'],
-                  aSummary.text,
-                  FirebaseAuth.instance.currentUser!.uid
-                );
-                // Does the transition between postingApt page to 
-                // Do not erase this plz
-                // Navigator.push(
-                //    context, 
-                //    MaterialPageRoute(builder: (context) => const HomePageApp())
-                // );
-              }
-            },
-            text: "Post Apartment"),
-            const SizedBox(height: 20),
-      ],
-    ))));
-  }
+        ),
+      ),
+    ),
+  );
+}
 }
