@@ -20,6 +20,7 @@ class PostingAptAppState extends State<PostingAptApp> {
   TextEditingController aTownController = TextEditingController();
   TextEditingController aNeighborhoodController = TextEditingController();
   TextEditingController aPriceController = TextEditingController();
+  TextEditingController aType = TextEditingController();
   TextEditingController aGenre = TextEditingController();
   TextEditingController aSummary = TextEditingController();
 
@@ -28,9 +29,13 @@ class PostingAptAppState extends State<PostingAptApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // When transitions are implemented the back arrow icon should appear
+        backgroundColor: Color(0xFF4CAF50),
+      ),
         body: SafeArea(
             child: Center(
-                child: Column(
+                child: ListView(
       children: [
         const SizedBox(height: 25),
         MyTextField(
@@ -52,6 +57,11 @@ class PostingAptAppState extends State<PostingAptApp> {
             obscureText: false),
         const SizedBox(height: 25),
         MyTextField(
+            controller: aType,
+            hintText: 'Type',
+            obscureText: false),
+        const SizedBox(height: 25),
+        MyTextField(
             controller: aGenre,
             hintText: 'Genre',
             obscureText: false),
@@ -68,6 +78,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text.trim().isEmpty ||
                   aPriceController.text.trim().isEmpty ||
                   aNeighborhoodController.text.trim().isEmpty||
+                  aType.text.trim().isEmpty||
                   aGenre.text.trim().isEmpty||
                   aSummary.text.trim().isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -82,6 +93,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text,
                   aPriceController.text,
                   aNeighborhoodController.text,
+                  aType.text,
                   aGenre.text,
                   aSummary.text,
                   FirebaseAuth.instance.currentUser!.uid
@@ -94,7 +106,8 @@ class PostingAptAppState extends State<PostingAptApp> {
                 // );
               }
             },
-            text: "Posting Apartment"),
+            text: "Post Apartment"),
+            const SizedBox(height: 20),
       ],
     ))));
   }
