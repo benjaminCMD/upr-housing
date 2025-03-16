@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_button.dart';
+import 'package:upr_housing/components/my_dropdown.dart';
 import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:upr_housing/pages/home_page.dart';
+
 
 class PostingAptApp extends StatefulWidget {
   const PostingAptApp({super.key});
@@ -15,13 +17,28 @@ class PostingAptApp extends StatefulWidget {
 }
 
 class PostingAptAppState extends State<PostingAptApp> {
+
+  // Available dropdowns with their initial values, new dropdowns should be added here with respective key.
+  Map<String, String?> dropDownInitialValues = {
+    'aType': null,
+    'aGender': null,
+  };
+  // List of items for the dropdowns
+  List<String> types = ['Apartment', 'Studio', 'Dorm'];
+  List<String> genders = ['Male', 'Female', 'Any'];
+
+  // Function to update the value of the dictionary above
+  void selectedDropdownValue(String key, String? newValue){
+    setState(() {
+      dropDownInitialValues[key] = newValue;
+    });
+  }
+  
   //Creating Controller for each one of the boxes, in order to save the information
   TextEditingController aTitleController = TextEditingController();
   TextEditingController aTownController = TextEditingController();
   TextEditingController aNeighborhoodController = TextEditingController();
   TextEditingController aPriceController = TextEditingController();
-  TextEditingController aType = TextEditingController();
-  TextEditingController aGenre = TextEditingController();
   TextEditingController aSummary = TextEditingController();
 
   Apartment apt = Apartment(); //Create class Apartment
@@ -56,15 +73,17 @@ class PostingAptAppState extends State<PostingAptApp> {
             hintText: 'Neighborhood',
             obscureText: false),
         const SizedBox(height: 25),
-        MyTextField(
-            controller: aType,
-            hintText: 'Type',
-            obscureText: false),
+        MyDropdown(
+          text: 'Type', 
+          items: types,
+          selectedValue: (value) => selectedDropdownValue('aType', value), // Passes value of dropdown to update dictionary
+          ),
         const SizedBox(height: 25),
-        MyTextField(
-            controller: aGenre,
-            hintText: 'Genre',
-            obscureText: false),
+        MyDropdown(
+          text: 'Gender', 
+          items: genders,
+          selectedValue: (value) => selectedDropdownValue('aGender', value),
+          ),
         const SizedBox(height: 25),
         MyLargetextfield(
             controller: aSummary,
@@ -78,12 +97,11 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text.trim().isEmpty ||
                   aPriceController.text.trim().isEmpty ||
                   aNeighborhoodController.text.trim().isEmpty||
-                  aType.text.trim().isEmpty||
-                  aGenre.text.trim().isEmpty||
+                  dropDownInitialValues.containsValue(null)|| // if any of the dropdown initial values are still null
                   aSummary.text.trim().isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Please field all the blanks!'),
+                    content: Text('Please fill all the fields!'),
                     backgroundColor: Colors.red,
                   ),
                 );
@@ -93,8 +111,8 @@ class PostingAptAppState extends State<PostingAptApp> {
                   aTownController.text,
                   aPriceController.text,
                   aNeighborhoodController.text,
-                  aType.text,
-                  aGenre.text,
+                  dropDownInitialValues['aType'],
+                  dropDownInitialValues['aGender'],
                   aSummary.text,
                   FirebaseAuth.instance.currentUser!.uid
                 );
