@@ -3,7 +3,8 @@ import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_snackbar.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:upr_housing/model/users.dart';
 
 
 
@@ -18,32 +19,19 @@ class SignupPage extends StatelessWidget{
   final confirmPasswordController = TextEditingController();
 
 
-  Future<UserCredential> createUser() async {
-    return await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: emailController.text, 
-      password: passwordController.text,
-    );
-  }
-
-  Future<void> addUserInfoToFireStore(uid) async {
-    await FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'username': usernameController.text,
-      'email': emailController.text,
-      'phone': phoneController.text,
-      'uid': uid,
-      'createdAt': Timestamp.now(),
-    });
-  }
 
   void signUserUp(context) async {
     try {
       // Store user details in Firestore
+      Users user = Users();
       if(passwordController.text == confirmPasswordController.text){
-        UserCredential userCredential = await createUser();
+        UserCredential userCredential = await user.createUser(emailController.text, passwordController.text);
+        // await createUser();
 
         String uid = userCredential.user!.uid;
 
-        addUserInfoToFireStore(uid);
+        user.addUser(usernameController.text, emailController.text, phoneController.text, uid);
+
         Navigator.pop(context);
 
       } else{
