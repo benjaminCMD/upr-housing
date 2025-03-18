@@ -18,6 +18,19 @@ class MyDropdown extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: DropdownMenu(
         width: 150,
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black87)
+          ),
+          fillColor: Colors.white,
+          filled: true
+        ),
+        menuStyle: MenuStyle(
+          side: WidgetStatePropertyAll(
+            BorderSide(color: Colors.black87)
+            ),
+          backgroundColor: WidgetStatePropertyAll(Colors.white),
+        ),
         hintText: text,
         dropdownMenuEntries: items.map((e) => DropdownMenuEntry(value: e, label: e),).toList(),
         onSelected: (value) {
