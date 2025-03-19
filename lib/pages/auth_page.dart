@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/pages/login.dart';
 import 'dummy_home.dart';
 import 'package:upr_housing/pages/posting_apt.dart';
@@ -19,7 +20,7 @@ class AuthPage extends StatelessWidget {
 
           if (snapshot.hasData) {
            // return HomePageApp(); // if you are working on different page, change it here
-           return HomePageApp();
+           return Navbar();
           }
 
           else {

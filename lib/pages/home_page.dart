@@ -7,6 +7,7 @@ import 'package:upr_housing/components/product_card.dart';
 // import 'package:upr_housing/components/product_list.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:upr_housing/components/navBar.dart';
 
 
 class HomePageApp extends StatefulWidget {
@@ -60,7 +61,8 @@ class _HomePageAppState extends State<HomePageApp> {
         backgroundColor: const Color(0xFF4CAF50),
         automaticallyImplyLeading: false,
       ),
-      body: SafeArea(
+      body: 
+      SafeArea(
         child: Column(
           children: [
             Expanded(
@@ -89,9 +91,13 @@ class _HomePageAppState extends State<HomePageApp> {
                 },
               ),
             ),
+
           ],
+          
         ),
       ),
+      //bottomNavigationBar: Navbar(),
+      
     );
   }
 }

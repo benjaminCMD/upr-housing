@@ -1,9 +1,12 @@
 
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/pages/signup.dart';
+import 'package:upr_housing/components/navBar.dart';
 
 // import 'package:upr_housing/pages/signup.dart';
 
@@ -15,6 +18,7 @@ class LoginPage extends StatelessWidget{
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  
   void signUserIn() async {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: emailController.text, 
@@ -61,6 +65,10 @@ class LoginPage extends StatelessWidget{
               hintText: 'Password',
               obscureText: true,
             ),
+
+            
+
+
 
 
             Padding(
@@ -112,7 +120,7 @@ class LoginPage extends StatelessWidget{
                 ),
                 ),
               ],
-            )
+            ),
             // SignUpButton(
             //   onTap: () {
             //     Navigator.push(
