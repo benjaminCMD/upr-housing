@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/product.dart';
+import 'package:upr_housing/pages/focus_apartment.dart';
 
-
-class ProductCardApp extends StatelessWidget {
+class ProductCardApp extends StatefulWidget {
   //Required Product to initialize the card
   final Product product;
 
@@ -12,14 +12,35 @@ class ProductCardApp extends StatelessWidget {
   });
 
   @override
+  State<ProductCardApp> createState() => _ProductCardAppState();
+  
+}
+
+
+
+
+class _ProductCardAppState extends State<ProductCardApp> {
+  
+    void movetoFocusApartment(Product p)
+  {
+    Navigator.push(context,MaterialPageRoute(builder: (context) => FocusApartment(product: widget.product,)),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return  Card(
+    return GestureDetector(
+      onTap: (){
+        movetoFocusApartment(widget.product);
+      },
+      child:
+    Card(
       color:const Color.fromARGB(255, 213, 208, 194),
       margin: EdgeInsets.all(8),
       child: Row(mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(product.imageUrl,
+          Image.network(widget.product.imageUrl,
           width: 225,
           height: 225,
           fit:BoxFit.cover
@@ -29,16 +50,21 @@ class ProductCardApp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.title),//name of the owner
+                Text(widget.product.title),//name of the owner
                 SizedBox(height: 20,),
-                Text('Summary: ' + product.summary),
+                if(widget.product.summary.length > 10)
+                
+                  Text('Summary: '+widget.product.summary.substring(1,11) + '...')
+                else
+                
+                  Text('Summary: ' + widget.product.summary),
                 SizedBox(height: 20,),
-                Text('Price: ' + product.price.toString(),
+                Text('Price: ' + widget.product.price.toString(),
                 ),
                 SizedBox(height: 20,),
                 Row(children: [
                   Icon(Icons.thumb_up,color: Colors.red,),
-                  Text("   " + product.likes.toString())
+                  Text("   " + widget.product.likes.toString())
                 ],)
               ],
             ),
@@ -46,6 +72,7 @@ class ProductCardApp extends StatelessWidget {
             ),
         ], 
       ),
+    )
     );
   }
 }
