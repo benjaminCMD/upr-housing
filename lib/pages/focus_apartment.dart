@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/product.dart';
+import 'package:upr_housing/pages/home_page.dart';
 
 class FocusApartment extends StatelessWidget {
 
@@ -17,7 +18,11 @@ class FocusApartment extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 224, 222, 214),
       appBar: AppBar(
-        title: SizedBox(
+        title: SizedBox(child: GestureDetector(onTap:() {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageApp(),));
+        },
+        child:Icon(Icons.arrow_back),
+        ),
         ),
         backgroundColor: const Color(0xFF4CAF50),
         automaticallyImplyLeading: false,
