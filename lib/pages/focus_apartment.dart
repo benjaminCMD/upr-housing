@@ -22,7 +22,7 @@ class FocusApartment extends StatelessWidget {
         backgroundColor: const Color(0xFF4CAF50),
         automaticallyImplyLeading: false,
       ),
-      body: SafeArea( child:Column(
+      body: SafeArea( child:Center(child:Column(
         children: [SizedBox(height: 25,),
         Image.network(product.imageUrl),
         SizedBox(height: 15,),
@@ -45,17 +45,17 @@ class FocusApartment extends StatelessWidget {
         Container(decoration: BoxDecoration(),
         child: Text("Price: " + product.price,style: TextStyle(fontSize: 25),
         ),
-        margin: const EdgeInsets.all(25),
+        margin: const EdgeInsets.all(10),
         ),
         SizedBox(height: 15,),
         Container(decoration: BoxDecoration(),
         child: Text("Likes: " + product.likes.toString(),style: TextStyle(fontSize: 25),
         ),
-        margin: const EdgeInsets.all(25),
+        margin: const EdgeInsets.all(10),
         ),
         ],
+      )
       ),
-
     )
     );
       }
