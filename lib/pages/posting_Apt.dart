@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_button.dart';
@@ -7,6 +10,7 @@ import 'package:upr_housing/components/my_textfield.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:upr_housing/pages/home_page.dart';
+import 'package:upr_housing/model/images.dart';
 
 
 class PostingAptApp extends StatefulWidget {
@@ -40,6 +44,12 @@ class PostingAptAppState extends State<PostingAptApp> {
   TextEditingController aNeighborhoodController = TextEditingController();
   TextEditingController aPriceController = TextEditingController();
   TextEditingController aSummary = TextEditingController();
+
+  ImageService imageService = ImageService();
+  
+// IMAGES
+  File? selectedImages;
+  String downloadUrls = '';
 
   Apartment apt = Apartment(); //Create class Apartment
 
@@ -121,14 +131,33 @@ class PostingAptAppState extends State<PostingAptApp> {
                 obscureText: false,
               ),
               const SizedBox(height: 25),
+              MyButton(onTap: () async {
+                File? selectedImage = await imageService.pickImages();
+                setState(() {
+                  selectedImages = selectedImage;
+                });
+              }, 
+              text: "pick image"),
+              if (selectedImages != null)
+  Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Image.file(
+      selectedImages!,
+      height: 150,
+      fit: BoxFit.cover,
+    ),
+  ),
+
+              const SizedBox(height: 25),
               MyButton(
-                onTap: () {
+                onTap: () async {
                   if (aTitleController.text.trim().isEmpty ||
                       aTownController.text.trim().isEmpty ||
                       aPriceController.text.trim().isEmpty ||
                       aNeighborhoodController.text.trim().isEmpty ||
                       dropDownInitialValues.containsValue(null) ||
-                      aSummary.text.trim().isEmpty) {
+                      aSummary.text.trim().isEmpty ||
+                      selectedImages == null)  {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Please fill all the fields!'),
@@ -136,7 +165,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                       ),
                     );
                   } else {
-                    apt.addApartment(
+                    String aID = await apt.addApartment(
                       aTitleController.text,
                       aTownController.text,
                       aPriceController.text,
@@ -146,6 +175,9 @@ class PostingAptAppState extends State<PostingAptApp> {
                       aSummary.text,
                       FirebaseAuth.instance.currentUser!.uid,
                     );
+                    downloadUrls = await imageService.addImage(selectedImages!, aID);
+                    await FirebaseFirestore.instance.collection('Apartments').doc(aID).update({'ImageUrl':downloadUrls});
+                   
                   }
                 },
                 text: "Submit",
