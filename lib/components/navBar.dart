@@ -37,7 +37,7 @@ class _NavbarState extends State<Navbar> {
 
     return Scaffold( 
       body: states[myIndex],
-      bottomNavigationBar:  BottomNavigationBar(
+      bottomNavigationBar: myIndex!= 1 ? BottomNavigationBar(
       onTap: (index){
         setState(() {
           myIndex = index;
@@ -72,7 +72,7 @@ class _NavbarState extends State<Navbar> {
         ),
       ],
       
-      )
+      ): null,
       );
   }
 }
