@@ -67,6 +67,3 @@ class FocusApartment extends StatelessWidget {
       }
 }
 
-
-// A possible solution is to add an ID to the product class in order to make this page recieve a string which would be that ID, to 
-// retrieve the information of that specifically document.
