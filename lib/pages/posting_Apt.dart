@@ -180,6 +180,8 @@ class PostingAptAppState extends State<PostingAptApp> {
                     );
                     downloadUrls = await imageService.addImage(selectedImages!, aID);
                     await FirebaseFirestore.instance.collection('Apartments').doc(aID).update({'ImageUrl':downloadUrls});
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()) );
                    
                   }
                 },
