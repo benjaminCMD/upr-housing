@@ -59,7 +59,7 @@ class _ProductCardAppState extends State<ProductCardApp> {
                 
                   Text('Summary: ' + widget.product.summary),
                 SizedBox(height: 20,),
-                Text('Price: ' + widget.product.price.toString(),
+                Text('Price: ' + widget.product.price.toString() +' \$',
                 ),
                 SizedBox(height: 20,),
                 Row(children: [
