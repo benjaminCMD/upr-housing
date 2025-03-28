@@ -19,13 +19,8 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot) {
 
           if (snapshot.hasData) {
-<<<<<<< HEAD
-            //return HomePageApp(); // if you are working on different page, change it here
-           return PostingAptApp();
-=======
            // return HomePageApp(); // if you are working on different page, change it here
            return Navbar();
->>>>>>> NavBar
           }
 
           else {
