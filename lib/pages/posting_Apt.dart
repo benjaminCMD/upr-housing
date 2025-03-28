@@ -7,6 +7,7 @@ import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/components/my_dropdown.dart';
 import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
+import 'package:upr_housing/components/navBar.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:upr_housing/pages/home_page.dart';
@@ -76,13 +77,15 @@ class PostingAptAppState extends State<PostingAptApp> {
           onPressed: () {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageApp()) );
             Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()) );
           } , 
           icon: Icon(Icons.arrow_back_outlined),  color: Colors.black ,),
         centerTitle: true, // Centers the title
         backgroundColor: Color(0xFF4CAF50),
         // toolbarHeight: 35,
       ),
-      body: SafeArea(
+      body:
+      SafeArea(
         child: Center(
           child: ListView(
             children: [
