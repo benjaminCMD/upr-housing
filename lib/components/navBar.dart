@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upr_housing/pages/chatPage.dart';
 import 'package:upr_housing/pages/dummy_home.dart';
 import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/pages/posting_Apt.dart';
@@ -22,7 +23,7 @@ class _NavbarState extends State<Navbar> {
   final states = [
     HomePageApp(),
     PostingAptApp(),
-    HomePage(),
+    chatPageApp(),
     HomePage()
   ];
 
