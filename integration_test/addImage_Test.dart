@@ -1,8 +1,6 @@
-import 'dart:io';
-
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'helpers/assetToFile.dart';
 import 'helpers/test_timer.dart';
 import 'package:upr_housing/model/images.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,8 +17,8 @@ void main() {
 
   testWidgets('Measure image uploading multiple times', (tester) async {
     final imageService = ImageService();
-    final testImage = File('assets/images/google.png');
-
+    final testImage = await assetToFile('assets/images/google.png', 'google.png');
+    
 
     expect(await testImage.exists(), isTrue, reason: 'Test image not found');
 
@@ -29,10 +27,10 @@ void main() {
       password: '12345678',
     );
 
-    final timer = TestTimer('Image uploading to Firebase Storage');
+    final timer = TestTimer(' Image uploading to Firebase Storage');
 
     
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 10; i++) {
       await timer.run(() async{ 
 
         final testUrl = await imageService.addImage(testImage, 'testImage_aID_$i');

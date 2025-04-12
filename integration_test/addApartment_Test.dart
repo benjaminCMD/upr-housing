@@ -23,9 +23,9 @@ void main() {
 
     final uid = FirebaseAuth.instance.currentUser!.uid;
 
-    final timer = TestTimer('Apartment Creation');
+    final timer = TestTimer(' Apartment Creation to Firebase Database');
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 10; i++) {
       await timer.run(() => apt.addApartment(
             'Test Title $i',
             'Test Town',
