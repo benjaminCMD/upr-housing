@@ -154,7 +154,8 @@ class PostingAptAppState extends State<PostingAptApp> {
               const SizedBox(height: 25),
               MyButton(
                 onTap: () async {
-                  if (aTitleController.text.trim().isEmpty ||
+                  int? price = int.tryParse(aPriceController.text);
+                  if (aTitleController.text.trim().isEmpty || // Not allowing empty fields
                       aTownController.text.trim().isEmpty ||
                       aPriceController.text.trim().isEmpty ||
                       aNeighborhoodController.text.trim().isEmpty ||
@@ -163,11 +164,19 @@ class PostingAptAppState extends State<PostingAptApp> {
                       selectedImages == null)  {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Please fill all the fields!'),
+                        content: Text('Please fill all the fields!'), 
                         backgroundColor: Colors.red,
                       ),
                     );
-                  } else {
+                  } else if(price == null)// Making Price be an integer
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Remember, Price must be a number!'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }else {
                     String aID = await apt.addApartment(
                       aTitleController.text,
                       aTownController.text,
