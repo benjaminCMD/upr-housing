@@ -18,6 +18,7 @@ class Apartment {
       'ImageUrl':'TBD',
       'Likes': 0,
       'uID' : uID,
+      
     });
     
     await docRef.update({'aID': docRef.id});

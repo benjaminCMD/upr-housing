@@ -44,6 +44,7 @@ class _HomePageAppState extends State<HomePageApp> {
         likes: data['Likes'] ?? 0,
         price: data['Price'] ?? 0,
         title: data['Title'] ?? 'Benjamin',
+        uID: data['uID'] ?? 0 
       );
 
     p.add(product);

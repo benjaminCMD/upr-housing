@@ -1,3 +1,5 @@
+//import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +27,13 @@ class _ChatPageState extends State<chatPageApp>{
 
 
   Widget _buildUserList(){
+
+
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      stream: FirebaseFirestore.instance.collection('users').snapshots(),//where('messages.senderID', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots() ,
       builder: (context, snapshot){
         if(snapshot.hasError){
+         
           return const Text('error');
         }
 
@@ -36,8 +41,9 @@ class _ChatPageState extends State<chatPageApp>{
           return const Text('Loading...');
         }
 
+        var userList = snapshot.data!.docs.map<Widget>((doc) => _buildUserListItem(doc)).toList();
         return ListView(
-          children: snapshot.data!.docs.map<Widget>((doc) => _buildUserListItem(doc)).toList(),
+          children: userList,
         );
       },
     );

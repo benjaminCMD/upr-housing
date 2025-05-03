@@ -58,7 +58,6 @@ class _UserChatPageState extends State<userChatPageApp>{
           if (snapshot.connectionState == ConnectionState.waiting){
             return const Text('Loading...');
           }
-
           return ListView(
            children: snapshot.data!.docs.map((document) => _buildMessageItem(document)).toList(), 
           );

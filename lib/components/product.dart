@@ -5,6 +5,7 @@ class Product{
   String summary;
   int likes;
   String price;
+  String uID;
 
   Product({
     required this.imageUrl,
@@ -12,6 +13,7 @@ class Product{
     required this.summary,
     required this.likes,
     required this.price,
+    required this.uID
   });
 
   

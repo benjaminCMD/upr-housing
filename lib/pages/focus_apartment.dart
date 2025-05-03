@@ -1,8 +1,13 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/components/product.dart';
+import 'package:upr_housing/model/users.dart';
 import 'package:upr_housing/pages/home_page.dart';
+import 'package:upr_housing/components/my_button.dart';
+import 'package:upr_housing/pages/userChatPage.dart';
 
 class FocusApartment extends StatelessWidget {
 
@@ -35,6 +40,7 @@ class FocusApartment extends StatelessWidget {
         Container(decoration: BoxDecoration(),
         child: Text("Title: "+ product.title,style: TextStyle(fontSize: 25),
         ),
+        
         margin: const EdgeInsets.all(25),
         ),
         SizedBox(height: 15,),
@@ -43,25 +49,40 @@ class FocusApartment extends StatelessWidget {
         Container(decoration: BoxDecoration(),
         child: Text("Summary: " + product.summary,style: TextStyle(fontSize: 25),
         ),
-        margin: const EdgeInsets.all(25),
+        margin: const EdgeInsets.all(15),
         ),
         ),
         ),
-        SizedBox(height: 15,),
+        SizedBox(height: 10,),
         Container(decoration: BoxDecoration(),
         child: Text("Price: " + product.price,style: TextStyle(fontSize: 25),
         ),
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(2),
         ),
-        SizedBox(height: 15,),
+        SizedBox(height: 5,),
         Container(decoration: BoxDecoration(),
         child: Text("Likes: " + product.likes.toString(),style: TextStyle(fontSize: 25),
         ),
-        margin: const EdgeInsets.all(10),
+        
+        
+        
         ),
+
+        MyButton(
+          text:'Chat with owner',
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(
+                  receiverUserEmail: "Home owner",
+                  receiverUserID: product.uID,
+          )));
+          }
+            )
+        
         ],
+        
       )
       ),
+      
     )
     );
       }
