@@ -19,11 +19,34 @@ class LoginPage extends StatelessWidget{
   final passwordController = TextEditingController();
 
   
-  void signUserIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text, 
-      password: passwordController.text,
-    );
+  Future<void> signUserIn(context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Invalid Email'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          break;
+        default:
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Login Failed'),
+              backgroundColor: Colors.red,
+            ),
+          );
+          debugPrint(e.code);
+          debugPrint(e.message);
+          break;
+      }
+    }
   }
   void signUp() {}
 
@@ -88,7 +111,7 @@ class LoginPage extends StatelessWidget{
             const SizedBox(height: 40),
 
             MyButton(
-              onTap: signUserIn,
+              onTap: ()=>signUserIn(context),
               text: 'Sign In'
             ),
 

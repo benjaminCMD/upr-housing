@@ -68,6 +68,12 @@ class _NavbarState extends State<Navbar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(
+            Icons.home,
+            ),
+            label: "My Apt"
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
             Icons.person,
             ),
             label: "User"
