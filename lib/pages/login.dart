@@ -26,8 +26,9 @@ class LoginPage extends StatelessWidget{
         password: passwordController.text,
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.code);
       switch (e.code) {
-        case 'invalid-email':
+        case 'invalid-credential':
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Invalid Email'),
@@ -42,8 +43,6 @@ class LoginPage extends StatelessWidget{
               backgroundColor: Colors.red,
             ),
           );
-          debugPrint(e.code);
-          debugPrint(e.message);
           break;
       }
     }
