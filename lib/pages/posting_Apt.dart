@@ -8,7 +8,6 @@ import 'package:upr_housing/components/my_dropdown.dart';
 import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/navBar.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/model/images.dart';

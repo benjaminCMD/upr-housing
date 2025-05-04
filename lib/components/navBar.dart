@@ -26,7 +26,7 @@ class _NavbarState extends State<Navbar> {
     PostingAptApp(),
     chatPageApp(),
     UserPage(),
-    HomePageApp()
+    HomePage()
   ];
 
   int returnIndex(){
