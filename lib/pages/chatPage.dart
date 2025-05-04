@@ -70,4 +70,3 @@ class _ChatPageState extends State<chatPageApp>{
     }
   }
 }
-

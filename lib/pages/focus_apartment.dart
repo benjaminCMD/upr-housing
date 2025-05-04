@@ -25,7 +25,8 @@ class FocusApartment extends StatelessWidget {
       backgroundColor: const Color.fromARGB(255, 224, 222, 214),
       appBar: AppBar(
         title: SizedBox(child: GestureDetector(onTap:() {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar(),));
+          Navigator.pop(context);
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()));
         },
         child:Icon(Icons.arrow_back),
         ),
@@ -68,16 +69,17 @@ class FocusApartment extends StatelessWidget {
         
         ),
 
+        product.uID != FirebaseAuth.instance.currentUser!.uid ? 
         MyButton(
           text:'Chat with owner',
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(
                   receiverUserEmail: "Home owner",
                   receiverUserID: product.uID,
-          )));
+          ))) ;
           }
-            )
-        
+            ): SizedBox(height: 15,)
+               
         ],
         
       )

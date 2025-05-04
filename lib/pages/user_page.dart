@@ -1,34 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:flutter/material.dart';
-import 'package:upr_housing/pages/posting_Apt.dart';
+import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:upr_housing/components/product.dart';
 import 'package:upr_housing/components/product_card.dart';
-// import 'package:upr_housing/components/product_list.dart';
 import 'package:upr_housing/model/apartments.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:upr_housing/components/navBar.dart';
 
-
-class HomePageApp extends StatefulWidget {
-  const HomePageApp({super.key});
-
+class UserPage extends StatefulWidget {
+  const UserPage({super.key});
+  
   @override
-  State<HomePageApp> createState() => _HomePageAppState();
+  State<StatefulWidget> createState() => _UserPageAppState();
+
 }
 
-class _HomePageAppState extends State<HomePageApp> {
-  void signUserOut() {
-    FirebaseAuth.instance.signOut();
-  }
-
-  void moveToPostingApt() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PostingAptApp()),
-    );
-  }
-
+class _UserPageAppState extends State<UserPage>{
   
   Future<List<Product>> fetchApartments() async {
     List<Product>p  = [];
@@ -46,7 +32,7 @@ class _HomePageAppState extends State<HomePageApp> {
         title: data['Title'] ?? 'Benjamin',
         uID: data['uID'] ?? 0 
       );
-    product.uID != FirebaseAuth.instance.currentUser!.uid ? 
+    product.uID == FirebaseAuth.instance.currentUser!.uid ? 
     p.add(product): '';
     }
   
@@ -101,71 +87,7 @@ class _HomePageAppState extends State<HomePageApp> {
       //bottomNavigationBar: Navbar(),
       
     );
+  
   }
+
 }
-
-// class HomePageApp extends StatefulWidget {
-//   const HomePageApp({super.key});
-
-//   @override
-//   State<HomePageApp> createState() => HomePageAppState();
-// }
-
-// class HomePageAppState extends State<HomePageApp> {
-//   void signUserOut() {
-//     FirebaseAuth.instance.signOut();
-//   }
-
-//   void moveToPostingApt(){
-//     Navigator.push(
-//                    context, 
-//                    MaterialPageRoute(builder: (context) => PostingAptApp())
-//     );
-//   }
-
-//   Future<Object?> products = fetchApartments();
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: SizedBox(
-//           // height: 40, // Adjust height to fit nicely
-//           child: MySearchBar(),
-//   ),
-//       backgroundColor: Color(0xFF4CAF50) ,
-//       automaticallyImplyLeading: false, 
-//       ) ,
-//       body: SafeArea(
-//         child: Column(
-//           children: [
-//             MySearchBar(),
-
-
-
-//             // White Background Section (Main Content)
-//             // Expanded(
-//             //   child: Container(
-//             //     width: double.infinity,
-//             //     color: Colors.white,
-//             //     child: Center(
-//             //       child: ListView.builder(
-//             //         itemCount: products.length,
-//             //         itemBuilder: (context, index) {
-//             //           final product = products[index];
-//             //           return SizedBox(
-//             //             height: 225,
-//             //             child: ProductCardApp(product: product),
-//             //           );
-//             //         },
-//             //       ),
-//             //     ),
-//             //   ),
-//             // ),
-
-          
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

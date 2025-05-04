@@ -3,6 +3,7 @@ import 'package:upr_housing/pages/chatPage.dart';
 import 'package:upr_housing/pages/dummy_home.dart';
 import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/pages/posting_Apt.dart';
+import 'package:upr_housing/pages/user_page.dart';
 
 class Navbar extends StatefulWidget {
 
@@ -24,7 +25,7 @@ class _NavbarState extends State<Navbar> {
     HomePageApp(),
     PostingAptApp(),
     chatPageApp(),
-    HomePage()
+    UserPage()
   ];
 
   int returnIndex(){
