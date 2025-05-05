@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -239,6 +240,7 @@ class PostingAptAppState extends State<PostingAptApp> {
               const SizedBox(height: 25),
               MyButton(
                 onTap: () async {
+                  double? PriceType = double.tryParse(aPriceController.text.trim());
                   if (aTitleController.text.trim().isEmpty ||
                       aTownController.text.trim().isEmpty ||
                       aPriceController.text.trim().isEmpty ||
@@ -252,7 +254,16 @@ class PostingAptAppState extends State<PostingAptApp> {
                         backgroundColor: Colors.red,
                       ),
                     );
-                  } else {
+                  }else if(PriceType.runtimeType != double)
+                  {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Remember, the price must be a number!'),
+                        backgroundColor: Colors.red,
+                      ),
+                      );
+                  } 
+                  else {
                     String aID = await apt.addApartment(
                       aTitleController.text,
                       aTownController.text,
