@@ -48,8 +48,10 @@ class PostingAptAppState extends State<PostingAptApp> {
   ImageService imageService = ImageService();
   
 // IMAGES
-  File? selectedImages;
-  String downloadUrls = '';
+  // File? selectedImages;
+  List<File> selectedImages = [];
+  // String downloadUrls = '';
+  List<String> downloadUrls = [];
 
   Apartment apt = Apartment(); //Create class Apartment
 
@@ -133,22 +135,106 @@ class PostingAptAppState extends State<PostingAptApp> {
                 obscureText: false,
               ),
               const SizedBox(height: 25),
-              MyButton(onTap: () async {
-                File? selectedImage = await imageService.pickImages();
-                setState(() {
-                  selectedImages = selectedImage;
-                });
-              }, 
-              text: "pick image"),
-              if (selectedImages != null)
-  Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Image.file(
-      selectedImages!,
-      height: 150,
-      fit: BoxFit.cover,
-    ),
-  ),
+              //////////////////////////
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyButton(
+                    onTap: () async {
+                      try {
+                        List<File> pickedImages = await imageService.pickImagesTEST();
+                        setState(() {
+                          selectedImages = pickedImages;
+                        });
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(e.toString())),
+                        );
+                      }
+                    },
+                    text: 'Add Images',
+                  ),
+                  const SizedBox(height: 10),
+                  if (selectedImages.isNotEmpty)
+                    SizedBox(
+                      height: 110,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: selectedImages.length,
+                        itemBuilder: (context, index) {
+                          return Stack(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 8),
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.grey),
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    image: FileImage(selectedImages[index]),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedImages.removeAt(index);
+                                    });
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 12,
+                                    backgroundColor: Colors.black54,
+                                    child: Icon(Icons.close, size: 14, color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                ],
+              ),
+
+
+
+
+
+
+
+
+              // MyButton(onTap: () async {
+              //   // File? selectedImage = await imageService.pickImages();
+              //   try {
+              //     List<File> pickedImages = await imageService.pickImagesTEST();
+              //     setState(() {
+              //       selectedImages = pickedImages;
+              //     });
+              //   } catch (e) {
+              //     ScaffoldMessenger.of(context).showSnackBar(
+              //       SnackBar(content: Text(e.toString())),
+              //     );
+              //   }
+              //   // List<File> selectedImage = await imageService.pickImagesTEST();
+              //   // setState(() {
+              //   //   selectedImages = selectedImage;
+              //   // });
+              // }, 
+              // text: "pick image"),
+              // if (selectedImages != null)
+  // Padding(
+  //   padding: const EdgeInsets.all(8.0),
+  //   child: Image.file(
+  //     selectedImages!,
+  //     height: 150,
+  //     fit: BoxFit.cover,
+  //   ),
+  // ),
 
               const SizedBox(height: 25),
               MyButton(
@@ -159,7 +245,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                       aNeighborhoodController.text.trim().isEmpty ||
                       dropDownInitialValues.containsValue(null) ||
                       aSummary.text.trim().isEmpty ||
-                      selectedImages == null)  {
+                      selectedImages.isEmpty)  {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Please fill all the fields!'),
@@ -177,8 +263,16 @@ class PostingAptAppState extends State<PostingAptApp> {
                       aSummary.text,
                       FirebaseAuth.instance.currentUser!.uid,
                     );
-                    downloadUrls = await imageService.addImage(selectedImages!, aID);
-                    await FirebaseFirestore.instance.collection('Apartments').doc(aID).update({'ImageUrl':downloadUrls});
+                    // downloadUrls = await imageService.addImage(selectedImages!, aID);
+                    try{
+                      downloadUrls = await imageService.addImageTEST(selectedImages, aID);
+                      await FirebaseFirestore.instance.collection('Apartments').doc(aID).update({'ImageUrl':downloadUrls});
+                    } catch (e){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Error uploading images: $e"))
+                      );
+                    }
+                    
                     Navigator.pop(context);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()) );
                    

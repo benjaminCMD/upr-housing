@@ -12,14 +12,16 @@ class ImageService {
   
 
   Future<String> addImage(File image, String aID) async {
-
+    try{
       File file = File(image.path);
       String filePath = "Apartments/$aID/${DateTime.now().microsecondsSinceEpoch}.png";
       SettableMetadata metadata = SettableMetadata(customMetadata: {'aID':aID});
       await firebaseStorage.ref(filePath).putFile(file, metadata);
       String downloadUrl = await firebaseStorage.ref(filePath).getDownloadURL();
       return downloadUrl;
-     
+    } catch (e) {
+      throw Exception("Failed to upload image: $e");
+    }
   }
 
   Future<File?> pickImages() async{
@@ -27,9 +29,12 @@ class ImageService {
     return image != null ? File(image.path) : null;
   }
   
-  Future<List<File?>> pickImagesTEST({int maxImg = 5}) async{
-    final List<XFile>? images = await picker.pickMultiImage();
-    if (images == null || images.isEmpty) return [];
+  Future<List<File>> pickImagesTEST({int maxImg = 5}) async{
+    final List<XFile> images = await picker.pickMultiImage();
+    if (images.isEmpty) return [];
+    if (images.length > maxImg) {
+      throw Exception("You can only select up to $maxImg images.");
+    }
 
     return images.take(maxImg).map((x) => File(x.path)).toList();
 
