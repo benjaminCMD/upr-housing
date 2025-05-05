@@ -1,7 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:upr_housing/components/navBar.dart';
+// import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/components/product.dart';
 // import 'package:upr_housing/model/users.dart';
 // import 'package:upr_housing/pages/home_page.dart';

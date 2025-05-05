@@ -7,9 +7,9 @@ import 'package:upr_housing/pages/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthPage extends StatelessWidget {
-  final _auth = FirebaseAuth.instance;
+  // final _auth = FirebaseAuth.instance;
 
-  AuthPage({super.key});
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
