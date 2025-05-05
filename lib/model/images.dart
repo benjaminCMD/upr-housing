@@ -9,56 +9,41 @@ class ImageService {
 
   final firebaseStorage = FirebaseStorage.instance;
   final ImagePicker picker = ImagePicker();
-  // CollectionReference collection = FirebaseFirestore.instance.collection('Apartments');
-
-  // List<String> _imageUrls = [];
-
-  // bool _isLoading = false;
-  // bool _isUploading = false;
-
-  // List<String> get imageUrls => _imageUrls;
-  // bool get isLoading => _isLoading;
-  // bool get isUploading => _isUploading;
-
-
-
-  // Future<void> fetchImages() async {
-  //   _isLoading = true;
-
-  //   //final ListResult result = await firebaseStorage.ref('')
-  // }
+  
 
   Future<String> addImage(File image, String aID) async {
-    //_isUploading = true;
 
-    //notifyListeners();
-
-    
-    //final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    //if (image == null) return;
-
-    
-
-    // try {
       File file = File(image.path);
       String filePath = "Apartments/$aID/${DateTime.now().microsecondsSinceEpoch}.png";
       SettableMetadata metadata = SettableMetadata(customMetadata: {'aID':aID});
       await firebaseStorage.ref(filePath).putFile(file, metadata);
       String downloadUrl = await firebaseStorage.ref(filePath).getDownloadURL();
       return downloadUrl;
-      // return await firebaseStorage.ref(filePath).getDownloadURL();
-    // }
-
-    // catch (e) {
-    //   print("Upload failed: $e");
-    //   return null;
-    // }
+     
   }
 
   Future<File?> pickImages() async{
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     return image != null ? File(image.path) : null;
+  }
+  
+  Future<List<File?>> pickImagesTEST({int maxImg = 5}) async{
+    final List<XFile>? images = await picker.pickMultiImage();
+    if (images == null || images.isEmpty) return [];
+
+    return images.take(maxImg).map((x) => File(x.path)).toList();
+
+  }
+
+  Future<List<String>> addImageTEST(List<File> images, String aID) async{
+    List<String> urls = [];
+
+    for(var file in images){
+      final url = await addImage(file, aID);
+      urls.add(url);
+    }
+    return urls;
+
   }
 
 
