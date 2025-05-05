@@ -50,21 +50,29 @@ class _ProductCardAppState extends State<ProductCardApp> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.product.title),//name of the owner
-                SizedBox(height: 20,),
-                if(widget.product.summary.length > 10)
+                Text(widget.product.title), 
+                SizedBox(height: 20),
+                // if(widget.product.summary.length > 10)
                 
-                  Text('Summary: '+widget.product.summary.substring(1,11) + '...')
-                else
+                //   Text('Summary: ${widget.product.summary.substring(1,11)}...')
+                // else
                 
-                  Text('Summary: ' + widget.product.summary),
-                SizedBox(height: 20,),
-                Text('Price: ' + widget.product.price.toString() +' \$',
-                ),
-                SizedBox(height: 20,),
+                //   Text('Summary: ${widget.product.summary}'),
+                // SizedBox(height: 20,),
+
+                Text('Gender: ${widget.product.gender}'),
+                SizedBox(height: 20),
+
+                Text('Town: ${widget.product.town}'),
+                SizedBox(height: 20),
+
+                Text('Price: ${widget.product.price}'),
+                SizedBox(height: 20),
+
+
                 Row(children: [
                   Icon(Icons.thumb_up,color: Colors.red,),
-                  Text("   " + widget.product.likes.toString())
+                  Text("   ${widget.product.likes}")
                 ],)
               ],
             ),

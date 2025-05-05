@@ -37,16 +37,18 @@ class _HomePageAppState extends State<HomePageApp> {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
       Product product = Product(
-          imageUrl: data['ImageUrl'] ??
-              'https://w7.pngwing.com/pngs/575/378/png-transparent-easter-bunny-hare-cottontail-rabbit-domestic-rabbit-european-rabbit-rabbit-mammal-image-file-formats-animals-thumbnail.png', // Default image if none is provided
+        imageUrl: data['ImageUrl'] ?? 'https://w7.pngwing.com/pngs/575/378/png-transparent-easter-bunny-hare-cottontail-rabbit-domestic-rabbit-european-rabbit-rabbit-mammal-image-file-formats-animals-thumbnail.png', // Default image if none is provided
           summary: data['Summary'] ?? 'No summary available',
-          likes: data['Likes'] ?? 0,
-          price: data['Price'] ?? 0,
-          title: data['Title'] ?? 'Benjamin',
-          uID: data['uID'] ?? 0);
-      product.uID != FirebaseAuth.instance.currentUser!.uid
-          ? p.add(product)
-          : '';
+          likes: data['Likes'],
+          price: data['Price'],
+          title: data['Title'] ?? 'Unknown',
+          uID: data['uID'],
+          gender: data['Gender'], 
+          town: data['Town']
+          )
+          ;
+      product.uID != FirebaseAuth.instance.currentUser!.uid? 
+      p.add(product): '';
     }
 
     return p;
