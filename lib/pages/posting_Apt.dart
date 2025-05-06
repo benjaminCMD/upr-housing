@@ -250,7 +250,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                       selectedImages.isEmpty)  {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Please fill all the fields!'),
+                        content: Text('Please fill all the fields!'), 
                         backgroundColor: Colors.red,
                       ),
                     );
