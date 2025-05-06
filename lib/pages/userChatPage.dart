@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:upr_housing/components/username_title.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:upr_housing/model/users.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/model/chat.dart';
 
@@ -21,6 +23,7 @@ class _UserChatPageState extends State<userChatPageApp>{
   final TextEditingController _messageController = TextEditingController();
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  Users user = Users();
 
   void sendMessage() async {
     if(_messageController.text.isNotEmpty){
@@ -33,7 +36,10 @@ class _UserChatPageState extends State<userChatPageApp>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.receiverUserEmail)),
+      
+      appBar: AppBar(
+        title: UsernameTitle(uid: widget.receiverUserID , user: Users()),
+      ),
       body: Column(
         children: [
           Expanded(

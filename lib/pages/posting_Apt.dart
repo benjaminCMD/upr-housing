@@ -10,9 +10,9 @@ import 'package:upr_housing/components/my_largetextfield.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/model/apartments.dart';
-import 'package:upr_housing/pages/home_page.dart';
+// import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/model/images.dart';
-
+import 'package:upr_housing/components/my_snackbar.dart';
 
 class PostingAptApp extends StatefulWidget {
   const PostingAptApp({super.key});
@@ -236,6 +236,22 @@ class PostingAptAppState extends State<PostingAptApp> {
   //     fit: BoxFit.cover,
   //   ),
   // ),
+              MyButton(onTap: () async {
+                File? selectedImage = await imageService.pickImages();
+                setState(() {
+                  selectedImages = selectedImage;
+                });
+              }, 
+              text: "pick image"),
+              if (selectedImages != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.file(
+                  selectedImages!,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
 
               const SizedBox(height: 25),
               MyButton(
@@ -247,23 +263,9 @@ class PostingAptAppState extends State<PostingAptApp> {
                       aNeighborhoodController.text.trim().isEmpty ||
                       dropDownInitialValues.containsValue(null) ||
                       aSummary.text.trim().isEmpty ||
-                      selectedImages.isEmpty)  {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Please fill all the fields!'), 
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }else if(PriceType.runtimeType != double)
-                  {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Remember, the price must be a number!'),
-                        backgroundColor: Colors.red,
-                      ),
-                      );
-                  } 
-                  else {
+                      selectedImages == null)  {
+                      MySnackbar.displayMessage(context, 'Please fill all the fields!');
+                  } else {
                     String aID = await apt.addApartment(
                       aTitleController.text,
                       aTownController.text,

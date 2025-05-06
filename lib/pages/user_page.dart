@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:upr_housing/components/my_searchbar.dart';
+// import 'package:upr_housing/components/my_searchbar.dart';
 import 'package:upr_housing/components/product.dart';
 import 'package:upr_housing/components/product_card.dart';
 import 'package:upr_housing/model/apartments.dart';
@@ -46,11 +46,20 @@ class _UserPageAppState extends State<UserPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: SizedBox(
-          child: MySearchBar(),
+          child: Text(
+          "User Profile",
+          style: TextStyle(
+            color: Colors.black, 
+            fontSize: 20, 
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         ),
         backgroundColor: const Color(0xFF4CAF50),
         automaticallyImplyLeading: false,
+        toolbarHeight: 25,
       ),
       body: 
       SafeArea(

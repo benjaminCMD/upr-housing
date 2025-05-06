@@ -56,7 +56,7 @@ class _ChatPageState extends State<chatPageApp>{
 
     if(_auth.currentUser!.email != data['email']){
       return ListTile(
-        title: Text(data['email']),
+        title: Text(data['username']),
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(
             receiverUserEmail: data['email'],

@@ -36,7 +36,6 @@ class _NavbarState extends State<Navbar> {
   
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
 
     return Scaffold( 
       body: states[myIndex],

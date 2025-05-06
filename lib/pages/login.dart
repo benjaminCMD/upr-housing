@@ -1,12 +1,11 @@
 
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/pages/signup.dart';
-import 'package:upr_housing/components/navBar.dart';
+import 'package:upr_housing/components/my_snackbar.dart';
+// import 'package:upr_housing/components/navBar.dart';
 
 // import 'package:upr_housing/pages/signup.dart';
 
@@ -29,20 +28,11 @@ class LoginPage extends StatelessWidget{
       debugPrint(e.code);
       switch (e.code) {
         case 'invalid-credential':
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Invalid Email'),
-              backgroundColor: Colors.red,
-            ),
-          );
+          MySnackbar.displayMessage(context, 'Invalid Email');
           break;
         default:
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Login Failed'),
-              backgroundColor: Colors.red,
-            ),
-          );
+          MySnackbar.displayMessage(context, 'Login Failed');
+
           break;
       }
     }
@@ -143,14 +133,6 @@ class LoginPage extends StatelessWidget{
                 ),
               ],
             ),
-            // SignUpButton(
-            //   onTap: () {
-            //     Navigator.push(
-            //       context, 
-            //       MaterialPageRoute(builder: (context) => SignupPage()));
-            //   },
-            //   //onTap: signUp
-            // )
 
 
           ],

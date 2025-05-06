@@ -7,7 +7,7 @@ import 'package:upr_housing/components/product_card.dart';
 // import 'package:upr_housing/components/product_list.dart';
 import 'package:upr_housing/model/apartments.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:upr_housing/components/navBar.dart';
+// import 'package:upr_housing/components/navBar.dart';
 
 class HomePageApp extends StatefulWidget {
   const HomePageApp({super.key});
@@ -43,13 +43,16 @@ class _HomePageAppState extends State<HomePageApp> {
             ? data['ImageUrl'][0]
             : (data['ImageUrl'] ?? 'https://w7.pngwing.com/pngs/575/378/png-transparent-easter-bunny-hare-cottontail-rabbit-domestic-rabbit-european-rabbit-rabbit-mammal-image-file-formats-animals-thumbnail.png'),
           summary: data['Summary'] ?? 'No summary available',
-          likes: data['Likes'] ?? 0,
-          price: data['Price'] ?? 0,
-          title: data['Title'] ?? 'Benjamin',
-          uID: data['uID'] ?? 0);
-      product.uID != FirebaseAuth.instance.currentUser!.uid
-          ? p.add(product)
-          : '';
+          likes: data['Likes'],
+          price: data['Price'],
+          title: data['Title'] ?? 'Unknown',
+          uID: data['uID'],
+          gender: data['Gender'], 
+          town: data['Town']
+          )
+          ;
+      product.uID != FirebaseAuth.instance.currentUser!.uid? 
+      p.add(product): '';
     }
 
     return p;
