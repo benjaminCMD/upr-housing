@@ -33,7 +33,9 @@ class _UserPageAppState extends State<UserPage>{
         likes: data['Likes'] ?? 0,
         price: data['Price'] ?? 0,
         title: data['Title'] ?? 'Benjamin',
-        uID: data['uID'] ?? 0 
+        uID: data['uID'] ?? 0,
+        gender: data['Gender'],
+        town: data['Town']
       );
     product.uID == FirebaseAuth.instance.currentUser!.uid ? 
     p.add(product): '';
