@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:upr_housing/model/users.dart';
 import 'package:upr_housing/pages/userChatPage.dart';
 
 class chatPageApp extends StatefulWidget {
@@ -56,10 +57,10 @@ class _ChatPageState extends State<chatPageApp>{
 
     if(_auth.currentUser!.email != data['email']){
       return ListTile(
-        title: Text(data['email']),
+        title: Text(data['username']),
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(
-            receiverUserEmail: data['email'],
+            receiverUsername: data['username'],
             receiverUserID: data['uid'],
           )));
         }

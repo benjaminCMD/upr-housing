@@ -74,7 +74,7 @@ class FocusApartment extends StatelessWidget {
           text:'Chat with owner',
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(
-                  receiverUserEmail: "Home owner",
+                  receiverUsername: "Home owner",
                   receiverUserID: product.uID,
           ))) ;
           }
