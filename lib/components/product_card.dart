@@ -40,7 +40,7 @@ class _ProductCardAppState extends State<ProductCardApp> {
       child: Row(mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(widget.product.imageUrl,
+          Image.network(widget.product.imageUrl[0],
           width: 225,
           height: 225,
           fit:BoxFit.cover
