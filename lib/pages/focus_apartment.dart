@@ -7,6 +7,7 @@ import 'package:upr_housing/components/product.dart';
 // import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/pages/userChatPage.dart';
+import 'package:upr_housing/components/richtext.dart';
 
 class FocusApartment extends StatelessWidget {
   // final Product product;
@@ -30,6 +31,7 @@ class FocusApartment extends StatelessWidget {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 224, 222, 214),
         appBar: AppBar(
+          toolbarHeight: 30,
           title: SizedBox(
             child: GestureDetector(
               onTap: () {
@@ -43,68 +45,167 @@ class FocusApartment extends StatelessWidget {
           automaticallyImplyLeading: false,
         ),
         body: SafeArea(
-          child: Center(
-              child: Column(
+          child: SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Image.network(product.imageUrl),
+
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-     
-              Image.network(product.imageUrl),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                decoration: BoxDecoration(),
-                margin: const EdgeInsets.all(25),
-                child: Text(
-                  "Title: ${product.title}",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Container(
-                    decoration: BoxDecoration(),
-                    margin: const EdgeInsets.all(15),
-                    child: Text(
-                      "Description: ${product.summary}",
-                      style: TextStyle(fontSize: 25),
-                    ),
+              // const SizedBox(height: 15),
+              Text(
+                product.title,
+                style: const TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold
                   ),
-                ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(),
-                margin: const EdgeInsets.all(2),
-                child: Text(
-                  "Price: ${product.price}",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Container(
-                decoration: BoxDecoration(),
-                child: Text(
-                  "Likes: ${product.likes}",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              product.uID != FirebaseAuth.instance.currentUser!.uid ? MyButton(
-                text: 'Chat with owner',
-                onTap: () => talkWithOwner(context, product.uID, "Home Owner")
-               
-                ) 
-                : SizedBox(
-                      height: 15,
+
+              const SizedBox(height: 20),
+              LabelledText(boldedWord: 'Description: \n', regularWord: product.summary, wordSize: 25),
+
+              const SizedBox(height: 20),
+              LabelledText(boldedWord: 'Town: ', regularWord: product.town, wordSize: 25),
+
+              const SizedBox(height: 20),
+              LabelledText(boldedWord: 'Gender: ', regularWord: product.gender, wordSize: 25),
+
+              // const SizedBox(height: 15),
+              // LabelledText(boldedWord: 'Neighborhood: ', regularWord: product.),
+              
+          
+              const SizedBox(height: 20),
+              LabelledText(boldedWord: 'Price: ', regularWord: product.price, wordSize: 25),
+
+              const SizedBox(height: 20),
+              LabelledText(boldedWord: 'Likes: ', regularWord: '${product.likes}', wordSize: 25),
+
+
+              const SizedBox(height: 30),
+              product.uID != FirebaseAuth.instance.currentUser!.uid
+                  ? MyButton(
+                      text: 'Chat with owner',
+                      onTap: () => talkWithOwner(context, product.uID, "Home Owner"),
                     )
+                  : const SizedBox(height: 15),
             ],
-          )),
-        ));
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+  //       body: SafeArea(
+  // child: SingleChildScrollView(
+  //   child: Padding(
+  //     padding: const EdgeInsets.all(16.0),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Image.network(product.imageUrl),
+  //         const SizedBox(height: 15),
+  //         Text(
+  //           product.title,
+  //           style: const TextStyle(fontSize: 30),
+  //         ),
+  //         const SizedBox(height: 15),
+  //         Text(
+  //           "Description: ${product.summary}",
+  //           style: const TextStyle(fontSize: 25),
+  //         ),
+  //         const SizedBox(height: 15),
+  //         Text(
+  //           "Price: ${product.price}",
+  //           style: const TextStyle(fontSize: 25),
+  //         ),
+  //         const SizedBox(height: 10),
+  //         Text(
+  //           "Likes: ${product.likes}",
+  //           style: const TextStyle(fontSize: 25),
+  //         ),
+  //         const SizedBox(height: 20),
+  //         product.uID != FirebaseAuth.instance.currentUser!.uid
+  //             ? MyButton(
+  //                 text: 'Chat with owner',
+  //                 onTap: () => talkWithOwner(context, product.uID, "Home Owner"),
+  //               )
+  //             : const SizedBox(height: 15),
+  //       ],
+  //     ),
+  //   ),
+  // ),
+// ),
+        // body: SafeArea(
+        //   child:
+        //       Column(
+        //         crossAxisAlignment: CrossAxisAlignment.start,
+        //         children: [
+     
+        //       Image.network(product.imageUrl),
+        //       // SizedBox(
+        //       //   height: 15,
+        //       // ),
+        //       Container(
+        //         decoration: BoxDecoration(),
+        //         // margin: const EdgeInsets.all(25),
+        //         child: Text(
+        //           "${product.title}",
+        //           style: TextStyle(
+        //             fontSize: 30
+        //             ),
+        //         ),
+        //       ),
+        //       // SizedBox(
+        //       //   height: 15,
+        //       // ),
+        //       Expanded(
+        //         child: SingleChildScrollView(
+        //           child: Container(
+        //             decoration: BoxDecoration(),
+        //             // margin: const EdgeInsets.all(15),
+        //             child: Text(
+        //               "Description: ${product.summary}",
+        //               style: TextStyle(fontSize: 25),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //       // SizedBox(
+        //       //   height: 10,
+        //       // ),
+        //       Container(
+        //         decoration: BoxDecoration(),
+        //         // margin: const EdgeInsets.all(2),
+        //         child: Text(
+        //           "Price: ${product.price}",
+        //           style: TextStyle(fontSize: 25),
+        //         ),
+        //       ),
+        //       // SizedBox(
+        //       //   height: 5,
+        //       // ),
+        //       Container(
+        //         decoration: BoxDecoration(),
+        //         child: Text(
+        //           "Likes: ${product.likes}",
+        //           style: TextStyle(fontSize: 25),
+        //         ),
+        //       ),
+        //       product.uID != FirebaseAuth.instance.currentUser!.uid ? MyButton(
+        //         text: 'Chat with owner',
+        //         onTap: () => talkWithOwner(context, product.uID, "Home Owner")
+               
+        //         ) 
+        //         : SizedBox(
+        //               height: 15,
+        //             )
+        //     ],
+        //   ),
+        // ));
+    );
   }
 }
