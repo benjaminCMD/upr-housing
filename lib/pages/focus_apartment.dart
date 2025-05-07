@@ -1,6 +1,7 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 // import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/components/product.dart';
 // import 'package:upr_housing/model/users.dart';
@@ -49,7 +50,47 @@ class FocusApartment extends StatelessWidget {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Image.network(product.imageUrl),
+        // Image.network(product.imageUrl[0]),
+        SizedBox(
+          height: 375,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: product.imageUrl.length,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Scaffold(
+                          backgroundColor: Colors.black,
+                          appBar: AppBar(backgroundColor: Colors.transparent),
+                          body: Center(
+                            child: PhotoView(
+                              imageProvider: NetworkImage(product.imageUrl[index]),
+                              backgroundDecoration: const BoxDecoration(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      product.imageUrl[index],
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+
+                              );
+                            },
+                          ),
+                        ),
 
         Padding(
           padding: const EdgeInsets.all(16.0),

@@ -1,6 +1,7 @@
 class Product{
   //Class for the products presented in the Home page
-  String imageUrl;
+  // String imageUrl;
+  List<String> imageUrl;
   String title;
   String summary;
   int likes;

@@ -28,7 +28,7 @@ class ImageService {
     return image != null ? File(image.path) : null;
   }
   
-  Future<List<File>> pickImagesTEST({int maxImg = 5}) async{
+  Future<List<File>> pickMultipleImages({int maxImg = 5}) async{
     final List<XFile> images = await picker.pickMultiImage();
     if (images.isEmpty) return [];
     if (images.length > maxImg) {
@@ -39,7 +39,7 @@ class ImageService {
 
   }
 
-  Future<List<String>> addImageTEST(List<File> images, String aID) async{
+  Future<List<String>> addMultipleImages(List<File> images, String aID) async{
     List<String> urls = [];
 
     for(var file in images){
