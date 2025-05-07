@@ -143,7 +143,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                   MyButton(
                     onTap: () async {
                       try {
-                        List<File> pickedImages = await imageService.pickImagesTEST();
+                        List<File> pickedImages = await imageService.pickMultipleImages();
                         setState(() {
                           selectedImages = pickedImages;
                         });
@@ -202,57 +202,6 @@ class PostingAptAppState extends State<PostingAptApp> {
                 ],
               ),
 
-
-
-
-
-
-
-
-              // MyButton(onTap: () async {
-              //   // File? selectedImage = await imageService.pickImages();
-              //   try {
-              //     List<File> pickedImages = await imageService.pickImagesTEST();
-              //     setState(() {
-              //       selectedImages = pickedImages;
-              //     });
-              //   } catch (e) {
-              //     ScaffoldMessenger.of(context).showSnackBar(
-              //       SnackBar(content: Text(e.toString())),
-              //     );
-              //   }
-              //   // List<File> selectedImage = await imageService.pickImagesTEST();
-              //   // setState(() {
-              //   //   selectedImages = selectedImage;
-              //   // });
-              // }, 
-              // text: "pick image"),
-              // if (selectedImages != null)
-  // Padding(
-  //   padding: const EdgeInsets.all(8.0),
-  //   child: Image.file(
-  //     selectedImages!,
-  //     height: 150,
-  //     fit: BoxFit.cover,
-  //   ),
-  // ),
-              // MyButton(onTap: () async {
-              //   File? selectedImage = await imageService.pickImages();
-              //   setState(() {
-              //     selectedImages = selectedImage;
-              //   });
-              // }, 
-              // text: "pick image"),
-              // if (selectedImages != null)
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Image.file(
-              //     selectedImages!,
-              //     height: 150,
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
-
               const SizedBox(height: 25),
               MyButton(
                 onTap: () async {
@@ -278,7 +227,7 @@ class PostingAptAppState extends State<PostingAptApp> {
                     );
                     // downloadUrls = await imageService.addImage(selectedImages!, aID);
                     try{
-                      downloadUrls = await imageService.addImageTEST(selectedImages, aID);
+                      downloadUrls = await imageService.addMultipleImages(selectedImages, aID);
                       await FirebaseFirestore.instance.collection('Apartments').doc(aID).update({'ImageUrl':downloadUrls});
                     } catch (e){
                       ScaffoldMessenger.of(context).showSnackBar(
