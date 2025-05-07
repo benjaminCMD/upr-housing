@@ -40,4 +40,10 @@ class Users {
     return data['username'];
  
   }
+
+  Future<String?> getEmail(uid) async {
+    DocumentSnapshot doc = await collection.doc(uid).get();
+    final data = doc.data() as Map<String, dynamic>;
+    return data['email'];
+  }
 }

@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:upr_housing/components/navBar.dart';
 import 'package:upr_housing/components/product.dart';
-// import 'package:upr_housing/model/users.dart';
+import 'package:upr_housing/model/users.dart';
 // import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/components/my_button.dart';
 import 'package:upr_housing/pages/userChatPage.dart';
@@ -12,9 +12,10 @@ import 'package:upr_housing/components/richtext.dart';
 class FocusApartment extends StatelessWidget {
   // final Product product;
   final Product product;
+  // final Users user = Users();
   const FocusApartment({super.key, required this.product});
 
-  void talkWithOwner(BuildContext context, uid, email){
+  void talkWithOwner(BuildContext context, uid, email) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -29,183 +30,158 @@ class FocusApartment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 224, 222, 214),
-        appBar: AppBar(
-          toolbarHeight: 30,
+      backgroundColor: const Color.fromARGB(255, 224, 222, 214),
+      appBar: AppBar(
+          toolbarHeight: 35,
           title: SizedBox(
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
                 //Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()));
               },
-              child: Icon(Icons.arrow_back),
+              child: Icon(
+                Icons.arrow_back,
+                size: 30,
+                ),
             ),
           ),
           backgroundColor: const Color(0xFF4CAF50),
           automaticallyImplyLeading: false,
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.network(product.imageUrl),
+          
+            
 
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+
+
+            
+            
+        
+        
+        ),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // const SizedBox(height: 15),
-              Text(
-                product.title,
-                style: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold
-                  ),
+              Image.network(product.imageUrl),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // const SizedBox(height: 15),
+                    Text(
+                      product.title,
+                      style: const TextStyle(
+                          fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(width: 20),
+                        Center(
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.bookmark_add_outlined),
+                                iconSize: 35,
+                              ),
+                              Text(
+                                'Bookmark',
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.share),
+                              iconSize: 35,
+                            ),
+                            Text(
+                              'Share',
+                              style: const TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                        if (product.uID !=
+                            FirebaseAuth.instance.currentUser!.uid)
+                          Column(
+                            children: [
+                              IconButton(
+                                onPressed: () => talkWithOwner(
+                                    context, product.uID, "Home Owner"),
+                                icon: Icon(Icons.chat),
+                                iconSize: 35,
+                              ),
+                              Text(
+                                'Message',
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 20),
+                    LabelledText(
+                        boldedWord: 'Description: \n',
+                        regularWord: product.summary,
+                        wordSize: 25),
+
+                    const SizedBox(height: 20),
+                    LabelledText(
+                        boldedWord: 'Town: ',
+                        regularWord: product.town,
+                        wordSize: 25),
+
+                    const SizedBox(height: 20),
+                    LabelledText(
+                        boldedWord: 'Gender: ',
+                        regularWord: product.gender,
+                        wordSize: 25),
+
+                    // const SizedBox(height: 15),
+                    // LabelledText(boldedWord: 'Neighborhood: ', regularWord: product.),
+
+                    const SizedBox(height: 20),
+                    LabelledText(
+                        boldedWord: 'Price: ',
+                        regularWord: product.price,
+                        wordSize: 25),
+
+                    const SizedBox(height: 20),
+                    LabelledText(
+                        boldedWord: 'Likes: ',
+                        regularWord: '${product.likes}',
+                        wordSize: 25),
+
+                    const SizedBox(height: 30),
+
+                  ],
+                ),
               ),
-
-              const SizedBox(height: 20),
-              LabelledText(boldedWord: 'Description: \n', regularWord: product.summary, wordSize: 25),
-
-              const SizedBox(height: 20),
-              LabelledText(boldedWord: 'Town: ', regularWord: product.town, wordSize: 25),
-
-              const SizedBox(height: 20),
-              LabelledText(boldedWord: 'Gender: ', regularWord: product.gender, wordSize: 25),
-
-              // const SizedBox(height: 15),
-              // LabelledText(boldedWord: 'Neighborhood: ', regularWord: product.),
-              
-          
-              const SizedBox(height: 20),
-              LabelledText(boldedWord: 'Price: ', regularWord: product.price, wordSize: 25),
-
-              const SizedBox(height: 20),
-              LabelledText(boldedWord: 'Likes: ', regularWord: '${product.likes}', wordSize: 25),
-
-
-              const SizedBox(height: 30),
-              product.uID != FirebaseAuth.instance.currentUser!.uid
-                  ? MyButton(
-                      text: 'Chat with owner',
-                      onTap: () => talkWithOwner(context, product.uID, "Home Owner"),
-                    )
-                  : const SizedBox(height: 15),
             ],
           ),
         ),
-      ],
-    ),
-  ),
-),
-  //       body: SafeArea(
-  // child: SingleChildScrollView(
-  //   child: Padding(
-  //     padding: const EdgeInsets.all(16.0),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         Image.network(product.imageUrl),
-  //         const SizedBox(height: 15),
-  //         Text(
-  //           product.title,
-  //           style: const TextStyle(fontSize: 30),
-  //         ),
-  //         const SizedBox(height: 15),
-  //         Text(
-  //           "Description: ${product.summary}",
-  //           style: const TextStyle(fontSize: 25),
-  //         ),
-  //         const SizedBox(height: 15),
-  //         Text(
-  //           "Price: ${product.price}",
-  //           style: const TextStyle(fontSize: 25),
-  //         ),
-  //         const SizedBox(height: 10),
-  //         Text(
-  //           "Likes: ${product.likes}",
-  //           style: const TextStyle(fontSize: 25),
-  //         ),
-  //         const SizedBox(height: 20),
-  //         product.uID != FirebaseAuth.instance.currentUser!.uid
-  //             ? MyButton(
-  //                 text: 'Chat with owner',
-  //                 onTap: () => talkWithOwner(context, product.uID, "Home Owner"),
-  //               )
-  //             : const SizedBox(height: 15),
-  //       ],
-  //     ),
-  //   ),
-  // ),
-// ),
-        // body: SafeArea(
-        //   child:
-        //       Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-     
-        //       Image.network(product.imageUrl),
-        //       // SizedBox(
-        //       //   height: 15,
-        //       // ),
-        //       Container(
-        //         decoration: BoxDecoration(),
-        //         // margin: const EdgeInsets.all(25),
-        //         child: Text(
-        //           "${product.title}",
-        //           style: TextStyle(
-        //             fontSize: 30
-        //             ),
-        //         ),
-        //       ),
-        //       // SizedBox(
-        //       //   height: 15,
-        //       // ),
-        //       Expanded(
-        //         child: SingleChildScrollView(
-        //           child: Container(
-        //             decoration: BoxDecoration(),
-        //             // margin: const EdgeInsets.all(15),
-        //             child: Text(
-        //               "Description: ${product.summary}",
-        //               style: TextStyle(fontSize: 25),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //       // SizedBox(
-        //       //   height: 10,
-        //       // ),
-        //       Container(
-        //         decoration: BoxDecoration(),
-        //         // margin: const EdgeInsets.all(2),
-        //         child: Text(
-        //           "Price: ${product.price}",
-        //           style: TextStyle(fontSize: 25),
-        //         ),
-        //       ),
-        //       // SizedBox(
-        //       //   height: 5,
-        //       // ),
-        //       Container(
-        //         decoration: BoxDecoration(),
-        //         child: Text(
-        //           "Likes: ${product.likes}",
-        //           style: TextStyle(fontSize: 25),
-        //         ),
-        //       ),
-        //       product.uID != FirebaseAuth.instance.currentUser!.uid ? MyButton(
-        //         text: 'Chat with owner',
-        //         onTap: () => talkWithOwner(context, product.uID, "Home Owner")
-               
-        //         ) 
-        //         : SizedBox(
-        //               height: 15,
-        //             )
-        //     ],
-        //   ),
-        // ));
+      ),
     );
   }
 }
