@@ -33,77 +33,71 @@ class FocusApartment extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 224, 222, 214),
       appBar: AppBar(
-          toolbarHeight: 35,
-          title: SizedBox(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-                //Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()));
-              },
-              child: Icon(
-                Icons.arrow_back,
-                size: 30,
-                ),
+        toolbarHeight: 35,
+        title: SizedBox(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => Navbar()));
+            },
+            child: Icon(
+              Icons.arrow_back,
+              size: 30,
             ),
           ),
-          backgroundColor: const Color(0xFF4CAF50),
-          automaticallyImplyLeading: false,
-          
-            
-
-
-
-            
-            
-        
-        
         ),
+        backgroundColor: const Color(0xFF4CAF50),
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Image.network(product.imageUrl[0]),
-        SizedBox(
-          height: 375,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: product.imageUrl.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Scaffold(
-                          backgroundColor: Colors.black,
-                          appBar: AppBar(backgroundColor: Colors.transparent),
-                          body: Center(
-                            child: PhotoView(
-                              imageProvider: NetworkImage(product.imageUrl[index]),
-                              backgroundDecoration: const BoxDecoration(color: Colors.black),
+              SizedBox(
+                height: 375,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: product.imageUrl.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Scaffold(
+                                backgroundColor: Colors.black,
+                                appBar:
+                                    AppBar(backgroundColor: Colors.transparent),
+                                body: Center(
+                                  child: PhotoView(
+                                    imageProvider:
+                                        NetworkImage(product.imageUrl[index]),
+                                    backgroundDecoration: const BoxDecoration(
+                                        color: Colors.black),
+                                  ),
+                                ),
+                              ),
                             ),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            product.imageUrl[index],
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     );
                   },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      product.imageUrl[index],
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
                 ),
-
-                              );
-                            },
-                          ),
-                        ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -215,7 +209,6 @@ class FocusApartment extends StatelessWidget {
                         wordSize: 25),
 
                     const SizedBox(height: 30),
-
                   ],
                 ),
               ),
