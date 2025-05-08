@@ -23,7 +23,12 @@ class UsernameTitle extends StatelessWidget {
         } else if (!snapshot.hasData || snapshot.data == null) {
           return const Text('No Username');
         } else {
-          return Text(snapshot.data!);
+          return Text(snapshot.data!,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+          );
         }
       },
     );

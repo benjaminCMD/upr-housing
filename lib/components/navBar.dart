@@ -5,6 +5,7 @@ import 'package:upr_housing/pages/home_page.dart';
 import 'package:upr_housing/pages/posting_Apt.dart';
 import 'package:upr_housing/pages/user_page.dart';
 
+
 class Navbar extends StatefulWidget {
 
   //final Function()? onTap;
@@ -26,7 +27,9 @@ class _NavbarState extends State<Navbar> {
     PostingAptApp(),
     chatPageApp(),
     UserPage(),
-    HomePage()
+    // UserProfilePage()
+    // HomePage()
+    
   ];
 
   int returnIndex(){
@@ -65,12 +68,6 @@ class _NavbarState extends State<Navbar> {
             Icons.chat,
             ),
             label: "Chat"
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
-            ),
-            label: "My Apt"
         ),
         BottomNavigationBarItem(
           icon: Icon(
