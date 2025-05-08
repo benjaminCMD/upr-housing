@@ -21,7 +21,7 @@ class FocusApartment extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => userChatPageApp(
-          receiverUserEmail: email,
+          receiverUsername: email,
           receiverUserID: uid,
         ),
       ),

@@ -46,4 +46,19 @@ class Users {
     final data = doc.data() as Map<String, dynamic>;
     return data['email'];
   }
+
+  Future<String> getUser(uid) async{
+    var userInfo = 'User doesnt exist';
+    Users users = Users();
+    QuerySnapshot allUsers = await users.collection.get();
+    for (var doc in allUsers.docs) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      if(data['uid'] == uid){
+        userInfo = data['username'];
+        return userInfo;
+      }
+  } return userInfo;
+  }
+  
+
 }

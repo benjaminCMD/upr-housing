@@ -3,15 +3,17 @@ import 'package:upr_housing/components/username_title.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:upr_housing/model/users.dart';
+import 'package:flutter/rendering.dart';
 import 'package:upr_housing/components/my_textfield.dart';
 import 'package:upr_housing/model/chat.dart';
+import 'package:upr_housing/model/message.dart';
 
 class userChatPageApp extends StatefulWidget{
-  final String receiverUserEmail;
+  final String receiverUsername;
   final String receiverUserID;
   const userChatPageApp({
     super.key,
-    required this.receiverUserEmail,
+    required this.receiverUsername,
     required this.receiverUserID
   });
   
@@ -75,16 +77,56 @@ class _UserChatPageState extends State<userChatPageApp>{
     Map<String,dynamic> data = document.data() as Map<String, dynamic>;
 
     var alignment = (data['senderID'] == _firebaseAuth.currentUser!.uid) ? Alignment.centerRight:Alignment.centerLeft;
-
-    return Container(
+    var color = (data['senderID'] == _firebaseAuth.currentUser!.uid) ? Colors.green : Colors.grey;
+    var messageWidth = data['message'].toString().length.toDouble();
+    double messageWidthD = messageWidth;
+    if(messageWidth*12-(messageWidth) < 275){
+    return Align(
       alignment: alignment,
-      child: Column(
+      //widthFactor: 0.01, // 1% of parent width
+      //child: ConstrainedBox(
+        //constraints: BoxConstraints(maxWidth: messageWidthD),
+        child: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
+        //color: color,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: color
+        ),
+        child: Column(
         children: [
-          Text(data['senderEmail']),
+          //Text(data['senderEmail']),
           Text(data['message']),
-        ],
-      ),
-    );
+      ],
+        ),
+        
+  ),
+);}else{
+  return Align(
+      alignment: alignment,
+      //widthFactor: 0.01, // 1% of parent width
+      //child: ConstrainedBox(
+        //constraints: BoxConstraints(maxWidth: messageWidthD),
+        child: Container(
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(5),
+        width:  300 ,
+        //color: color,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: color
+        ),
+        child: Column(
+        children: [
+          //Text(data['senderEmail']),
+          Text(data['message']),
+      ],
+        ),
+        
+  ),
+);
+};
   }
 
 
