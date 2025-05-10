@@ -19,7 +19,16 @@ class _ChatPageState extends State<chatPageApp>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        centerTitle: true,
+        backgroundColor: const Color(0xFF4CAF50),
+        title: const Text('Chat',
+        style:TextStyle(
+              color: Colors.black,
+              fontSize: 22,
+              fontWeight: FontWeight.w500,
+            ),
+            ),
+        toolbarHeight: 25
       ),
 
       body: _buildUserList(),
@@ -57,6 +66,8 @@ class _ChatPageState extends State<chatPageApp>{
 
     if(_auth.currentUser!.email != data['email']){
       return ListTile(
+        leading: CircleAvatar(child: Text(data['username'][0]),),
+        trailing: Icon(Icons.chevron_right),
         title: Text(data['username']),
         onTap: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => userChatPageApp(

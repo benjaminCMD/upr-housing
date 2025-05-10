@@ -79,7 +79,7 @@ class _UserChatPageState extends State<userChatPageApp>{
     var alignment = (data['senderID'] == _firebaseAuth.currentUser!.uid) ? Alignment.centerRight:Alignment.centerLeft;
     var color = (data['senderID'] == _firebaseAuth.currentUser!.uid) ? Colors.green : Colors.grey;
     var messageWidth = data['message'].toString().length.toDouble();
-    double messageWidthD = messageWidth;
+    //double messageWidthD = messageWidth;
     if(messageWidth*12-(messageWidth) < 275){
     return Align(
       alignment: alignment,
@@ -126,7 +126,7 @@ class _UserChatPageState extends State<userChatPageApp>{
         
   ),
 );
-};
+}
   }
 
 
