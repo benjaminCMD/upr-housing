@@ -214,7 +214,10 @@ class PostingAptAppState extends State<PostingAptApp> {
                       aSummary.text.trim().isEmpty ||
                       selectedImages.isEmpty)  {
                       MySnackbar.displayMessage(context, 'Please fill all the fields!');
-                  } else {
+                  } else if(PriceType == null)
+                  {
+                    MySnackbar.displayMessage(context, 'Remember, Prices must be a number!');
+                  }else {
                     String aID = await apt.addApartment(
                       aTitleController.text,
                       aTownController.text,
