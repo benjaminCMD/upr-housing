@@ -16,6 +16,10 @@ class UserPage extends StatefulWidget {
   State<StatefulWidget> createState() => _UserPageAppState();
 }
 
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
 class _UserPageAppState extends State<UserPage> {
   Users user = Users();
   Future<List<Product>> fetchApartments() async {
@@ -186,7 +190,7 @@ class _UserPageAppState extends State<UserPage> {
                   ),
                   SizedBox(
                     width: 200,
-                    child: MyButton(onTap: () {}, text: 'Log Out'),
+                    child: MyButton(onTap: () =>{signUserOut()}, text: 'Log Out'),
                   )
                 ]),
             // Row(

@@ -43,6 +43,7 @@ class _NavbarState extends State<Navbar> {
     return Scaffold( 
       body: states[myIndex],
       bottomNavigationBar: myIndex!= 1 ? BottomNavigationBar(
+        selectedItemColor:  const Color(0xFF4CAF50),
       onTap: (index){
         setState(() {
           myIndex = index;
