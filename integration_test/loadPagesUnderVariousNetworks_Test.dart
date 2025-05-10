@@ -34,7 +34,7 @@ void main() {
     final individualChatTimer = TestTimer('Individual Chat Load');
 
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 10; i++) {
       // 1. Login Page
       await loginTimer.run(() async {
         await tester.pumpWidget(MaterialApp(home: LoginPage()));
