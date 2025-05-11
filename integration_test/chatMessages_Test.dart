@@ -61,9 +61,10 @@ void main() {
 
         expect(found, isTrue, reason: 'Message "$message" was not received in UI');
       });
+      await tester.pump(const Duration(seconds: 1));
     }
 
-    expect(timer.averageTime, lessThan(5000), reason: 'Message delivery is too slow');
+    expect(timer.averageTime, lessThan(5000), reason: 'Message delivery should be in under 5 seconds');
 
     timer.printSummary();
     timer.printSummaryAndCopy();

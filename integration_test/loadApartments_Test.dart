@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:upr_housing/firebase_options.dart';
-import 'package:upr_housing/main.dart'; // make sure this points to MyApp
 import 'package:upr_housing/pages/home_page.dart';
 import 'helpers/test_timer.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  testWidgets('Apartments should load under 5s', (tester) async {
+  testWidgets('Apartments should load under 2s', (tester) async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -31,7 +30,7 @@ void main() {
   }
 
   // ✅ Show in Test Results panel
-  expect(timer.averageTime, lessThan(5000), reason: 'Apartment loading should be fast');
+  expect(timer.averageTime, lessThan(2000), reason: 'Apartment loading should be in under 2 seconds');
 
   // ✅ Optional: Print result in console
   timer.printSummary();

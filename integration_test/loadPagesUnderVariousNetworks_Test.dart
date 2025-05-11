@@ -88,13 +88,13 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.textContaining('Description'), findsWidgets);
       });
-
+      // 6. Chat list page
       await chatTimer.run(() async {
         await tester.pumpWidget(const MaterialApp(home: chatPageApp()));
         await tester.pumpAndSettle();
         expect(find.text('Chat'), findsOneWidget);
       });
-
+      // 5. Individual chat
       await individualChatTimer.run(() async {
         final collection = FirebaseFirestore.instance.collection('users');
         final snapshot = await collection.get();
@@ -116,13 +116,13 @@ void main() {
     individualChatTimer.printSummaryAndCopy();
 
     // ❌ Fail test if too slow
-    expect(loginTimer.averageTime, lessThan(5000), reason: 'Login page too slow');
-    expect(signupTimer.averageTime, lessThan(5000), reason: 'Signup page too slow');
-    expect(homeTimer.averageTime, lessThan(5000), reason: 'Home page too slow');
-    expect(postTimer.averageTime, lessThan(5000), reason: 'Posting page too slow');
-    expect(focusTimer.averageTime, lessThan(5000), reason: 'Focus page too slow');
-    expect(chatTimer.averageTime, lessThan(5000), reason: 'Chat list page too slow');
-    expect(individualChatTimer.averageTime, lessThan(5000), reason: 'Individual chat page too slow');
+    expect(loginTimer.averageTime, lessThan(2000), reason: 'Login page should be in under 2 seconds');
+    expect(signupTimer.averageTime, lessThan(2000), reason: 'Signup page should be in under 2 seconds');
+    expect(homeTimer.averageTime, lessThan(2000), reason: 'Home page should be in under 2 seconds');
+    expect(postTimer.averageTime, lessThan(2000), reason: 'Posting page should be in under 2 seconds');
+    expect(focusTimer.averageTime, lessThan(2000), reason: 'Focus page should be in under 2 seconds');
+    expect(chatTimer.averageTime, lessThan(2000), reason: 'Chat list should be in under 2 seconds');
+    expect(individualChatTimer.averageTime, lessThan(2000), reason: 'Individual chat page should be in under 2 seconds');
   });
 }
 
